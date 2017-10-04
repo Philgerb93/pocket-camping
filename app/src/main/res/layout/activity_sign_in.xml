@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.philippegerbeau.pocketcamping.activities.SignInActivity">
+    tools:context="com.philippegerbeau.pocketcamping.activities.SignInActivity"
+    android:background="@color/colorBackground">
 
     <LinearLayout
         android:id="@+id/logo_layout"
@@ -42,10 +43,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/no_account"
-            android:textSize="@dimen/body_text"
+            android:textSize="@dimen/text_body"
             android:textAllCaps="false"
             android:background="?attr/selectableItemBackground"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:onClick="toSignUp"/>
     </FrameLayout>
     
     <LinearLayout
@@ -81,7 +83,7 @@
                     android:layout_height="match_parent"
                     android:inputType="textEmailAddress"
                     android:textColorHint="@color/colorTextPrimary"
-                    android:textSize="@dimen/body_text"
+                    android:textSize="@dimen/text_body"
                     android:hint="@string/email"
                     android:textColor="@color/colorTextPrimary"
                     android:background="@null"/>
@@ -114,7 +116,7 @@
                     android:layout_height="match_parent"
                     android:inputType="textPassword"
                     android:textColorHint="@color/colorTextPrimary"
-                    android:textSize="@dimen/body_text"
+                    android:textSize="@dimen/text_body"
                     android:hint="@string/password"
                     android:background="@null"/>
 
@@ -137,7 +139,8 @@
             android:backgroundTint="@color/colorPrimary"
             android:textColor="@android:color/white"
             android:text="@string/sign_in"
-            android:layout_gravity="center_horizontal"/>
+            android:layout_gravity="center_horizontal"
+            android:onClick="signIn"/>
 
     </LinearLayout>
 

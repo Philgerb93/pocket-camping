@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.philippegerbeau.pocketcamping.activities.SignInActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.philippegerbeau.pocketcamping.activities.SignInActivity"
+    android:background="@color/colorBackground">
 
     <LinearLayout
         android:id="@+id/logo_layout"
@@ -58,15 +60,22 @@
                     android:layout_margin="16dp"
                     android:contentDescription="@string/username"/>
 
-                <EditText
-                    android:id="@+id/sign_up_username"
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:inputType="textPersonName"
-                    android:textColorHint="@color/colorTextPrimary"
-                    android:hint="@string/username"
-                    android:textSize="@dimen/body_text"
-                    android:background="@null"/>
+                    app:errorEnabled="true">
+
+                    <EditText
+                        android:id="@+id/sign_up_username"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:inputType="textPersonName"
+                        android:textColorHint="@color/colorTextPrimary"
+                        android:hint="@string/username"
+                        android:textSize="@dimen/text_body"
+                        android:background="@null"/>
+
+                </android.support.design.widget.TextInputLayout>
             </LinearLayout>
 
             <View
@@ -96,7 +105,7 @@
                     android:layout_height="match_parent"
                     android:inputType="textEmailAddress"
                     android:textColorHint="@color/colorTextPrimary"
-                    android:textSize="@dimen/body_text"
+                    android:textSize="@dimen/text_body"
                     android:hint="@string/email"
                     android:background="@null"/>
             </LinearLayout>
@@ -128,7 +137,7 @@
                     android:layout_height="match_parent"
                     android:textColorHint="@color/colorTextPrimary"
                     android:inputType="textPassword"
-                    android:textSize="@dimen/body_text"
+                    android:textSize="@dimen/text_body"
                     android:hint="@string/password"
                     android:background="@null"/>
 
@@ -161,7 +170,7 @@
                     android:layout_height="match_parent"
                     android:inputType="textPassword"
                     android:textColorHint="@color/colorTextPrimary"
-                    android:textSize="@dimen/body_text"
+                    android:textSize="@dimen/text_body"
                     android:hint="@string/confirm_password"
                     android:background="@null"/>
             </LinearLayout>
@@ -174,7 +183,8 @@
             android:textColor="@android:color/white"
             android:text="@string/sign_in"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="32dp"/>
+            android:layout_marginTop="32dp"
+            android:onClick="signUp"/>
 
     </LinearLayout>
 
