@@ -5,6 +5,6 @@
     <color name="colorPrimaryLight">#98ee99</color>
     <color name="colorAccent">#ffab40</color>
     <color name="colorBackground">#fafafa</color>
-
     <color name="colorTextPrimary">#424242</color>
+    <color name="colorDivider">#BDBDBD</color>
 </resources>
