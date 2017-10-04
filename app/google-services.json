@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "885136722916",
+    "firebase_url": "https://pocketcamping.firebaseio.com",
+    "project_id": "pocketcamping",
+    "storage_bucket": "pocketcamping.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:885136722916:android:415299d86c3af342",
+        "android_client_info": {
+          "package_name": "com.philippegerbeau.pocketcamping"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "885136722916-pj30tubjk82q4i4g412prq2vecgtnoi5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.philippegerbeau.pocketcamping",
+            "certificate_hash": "ffed2a66dcae8134f0e1c2399ed1ce26c0037369"
+          }
+        },
+        {
+          "client_id": "885136722916-aek43j12df705ashedklcuatonlprdct.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCeIuXSUeBpUQeXbkSyZi2D__BJeJyJnvI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "885136722916-aek43j12df705ashedklcuatonlprdct.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
