@@ -3,10 +3,10 @@
     <color name="colorPrimary">#66bb6a</color>
     <color name="colorPrimaryDark">#338a3e</color>
     <color name="colorPrimaryLight">#98ee99</color>
-    <color name="colorAccent">#ffab40</color>
+    <color name="colorAccent">#66bb6a</color>
     <color name="colorBackground">#fafafa</color>
-    <color name="colorTextPrimary">#424242</color>
-    <color name="colorDivider">#BDBDBD</color>
+    <color name="colorTextPrimary">#757575</color>
+    <color name="colorDivider">#E0E0E0</color>
 
     <color name="bannerFilter">#60FFFFFF</color>
     <color name="transparentStatusBar">#30000000</color>

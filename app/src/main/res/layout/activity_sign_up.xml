@@ -45,46 +45,41 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="32dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-
+                
                 <ImageView
                     android:layout_width="@dimen/icon_size"
                     android:layout_height="@dimen/icon_size"
                     android:src="@drawable/user_icon"
                     android:tint="@color/colorTextPrimary"
-                    android:layout_margin="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="19dp"
                     android:contentDescription="@string/username"/>
 
                 <android.support.design.widget.TextInputLayout
+                    android:id="@+id/username_parent"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:errorEnabled="true">
+                    android:layout_height="wrap_content"
+                    app:hintEnabled="true"
+                    app:errorEnabled="true"
+                    android:layout_marginBottom="2dp">
 
                     <EditText
-                        android:id="@+id/sign_up_username"
+                        android:id="@+id/username"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:inputType="textPersonName"
-                        android:textColorHint="@color/colorTextPrimary"
                         android:hint="@string/username"
-                        android:textSize="@dimen/text_body"
-                        android:background="@null"/>
+                        android:textColor="@color/colorTextPrimary"/>
 
                 </android.support.design.widget.TextInputLayout>
-            </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/divider_size"
-                android:background="@color/colorDivider"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp">
-            </View>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -96,27 +91,28 @@
                     android:layout_height="@dimen/icon_size"
                     android:src="@drawable/email_icon"
                     android:tint="@color/colorTextPrimary"
-                    android:layout_margin="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="19dp"
                     android:contentDescription="@string/email"/>
 
-                <EditText
-                    android:id="@+id/sign_up_email"
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/email_parent"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:inputType="textEmailAddress"
-                    android:textColorHint="@color/colorTextPrimary"
-                    android:textSize="@dimen/text_body"
-                    android:hint="@string/email"
-                    android:background="@null"/>
-            </LinearLayout>
+                    android:layout_height="wrap_content"
+                    app:hintEnabled="true"
+                    app:errorEnabled="true">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/divider_size"
-                android:background="@color/colorDivider"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp">
-            </View>
+                    <EditText
+                        android:id="@+id/parent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textEmailAddress"
+                        android:hint="@string/email"
+                        android:textColor="@color/colorTextPrimary"/>
+
+                </android.support.design.widget.TextInputLayout>
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -128,28 +124,28 @@
                     android:layout_height="@dimen/icon_size"
                     android:src="@drawable/password_icon"
                     android:tint="@color/colorTextPrimary"
-                    android:layout_margin="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="19dp"
                     android:contentDescription="@string/password"/>
 
-                <EditText
-                    android:id="@+id/sign_up_password"
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/password_parent"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textColorHint="@color/colorTextPrimary"
-                    android:inputType="textPassword"
-                    android:textSize="@dimen/text_body"
-                    android:hint="@string/password"
-                    android:background="@null"/>
+                    android:layout_height="wrap_content"
+                    app:hintEnabled="true"
+                    app:errorEnabled="true">
+
+                    <EditText
+                        android:id="@+id/password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword"
+                        android:hint="@string/password"
+                        android:textColor="@color/colorTextPrimary"/>
+
+                </android.support.design.widget.TextInputLayout>
 
             </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/divider_size"
-                android:background="@color/colorDivider"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp">
-            </View>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -161,29 +157,38 @@
                     android:layout_height="@dimen/icon_size"
                     android:src="@drawable/password_icon"
                     android:tint="@color/colorTextPrimary"
-                    android:layout_margin="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="19dp"
                     android:contentDescription="@string/confirm_password"/>
 
-                <EditText
-                    android:id="@+id/sign_up_confirm_password"
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/confirm_parent"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:inputType="textPassword"
-                    android:textColorHint="@color/colorTextPrimary"
-                    android:textSize="@dimen/text_body"
-                    android:hint="@string/confirm_password"
-                    android:background="@null"/>
+                    android:layout_height="wrap_content"
+                    app:hintEnabled="true"
+                    app:errorEnabled="true">
+
+                    <EditText
+                        android:id="@+id/confirm"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword"
+                        android:hint="@string/confirm_password"
+                        android:textColor="@color/colorTextPrimary"/>
+
+                </android.support.design.widget.TextInputLayout>
+
             </LinearLayout>
-        </LinearLayout>
+
+            </LinearLayout>
 
         <Button
             android:layout_width="@dimen/button_width"
             android:layout_height="@dimen/button_height"
             android:backgroundTint="@color/colorPrimary"
             android:textColor="@android:color/white"
-            android:text="@string/sign_in"
+            android:text="@string/sign_up"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="32dp"
             android:onClick="signUp"/>
 
     </LinearLayout>

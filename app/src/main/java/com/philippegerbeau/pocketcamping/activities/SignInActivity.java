@@ -37,25 +37,37 @@ public class SignInActivity extends AppCompatActivity {
         fbUser = fbAuth.getCurrentUser();
         fbRootRef = FirebaseDatabase.getInstance().getReference();
 
-        signInEmail = (EditText) findViewById(R.id.sign_in_email);
-        signInPassword = (EditText) findViewById(R.id.sign_in_password);
+        signInEmail = (EditText) findViewById(R.id.email);
+        signInPassword = (EditText) findViewById(R.id.password);
     }
 
     public void signIn(View view) {
-        String email = signInEmail.getText().toString();
-        String password = signInPassword.getText().toString();
-        fbAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful() && fbUser != null) {
-                            nextActivity();
-                        } else {
-                            Toast.makeText(SignInActivity.this, getString(R.string.auth_failed),
-                                    Toast.LENGTH_SHORT).show();
+        if (validForm()) {
+            String email = signInEmail.getText().toString();
+            String password = signInPassword.getText().toString();
+
+            fbAuth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            System.out.println("WERE IN");
+                            if (task.isSuccessful() && fbUser != null) {
+                                nextActivity();
+                                finish();
+                            } else {
+                                Toast.makeText(SignInActivity.this, getString(R.string.auth_failed),
+                                        Toast.LENGTH_SHORT).show();
+                            }
                         }
-                    }
-                });
+                    });
+        } else {
+            Toast.makeText(this, getString(R.string.auth_failed), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private boolean validForm() {
+        return signInEmail.getText().toString().length() > 0 &&
+                signInPassword.getText().toString().length() > 0;
     }
 
     private void nextActivity() {

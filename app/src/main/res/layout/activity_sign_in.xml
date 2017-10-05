@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.philippegerbeau.pocketcamping.activities.SignInActivity"
     android:background="@color/colorBackground">
 
@@ -20,7 +21,6 @@
             android:layout_width="@dimen/logo_size"
             android:layout_height="@dimen/logo_size"
             android:src="@drawable/logo"
-            android:tint="@android:color/white"
             tools:ignore="ContentDescription"/>
 
         <TextView
@@ -32,23 +32,40 @@
 
     </LinearLayout>
 
-    <FrameLayout
+    <RelativeLayout
         android:id="@+id/sign_up_layout"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/colorPrimary"
+        android:layout_height="70dp"
         android:layout_alignParentBottom="true">
 
-        <Button
+        <View
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="@dimen/divider_size"
+            android:background="@color/colorDivider"
+            android:layout_alignParentTop="true">
+        </View>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="@string/no_account"
+            android:textSize="18sp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="16dp"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sign_up"
             android:textSize="@dimen/text_body"
-            android:textAllCaps="false"
-            android:background="?attr/selectableItemBackground"
-            android:textColor="@android:color/white"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:textColor="@color/colorPrimary"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="16dp"
             android:onClick="toSignUp"/>
-    </FrameLayout>
+    </RelativeLayout>
     
     <LinearLayout
         android:layout_width="match_parent"
@@ -62,7 +79,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="32dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -74,28 +91,27 @@
                     android:layout_height="@dimen/icon_size"
                     android:src="@drawable/email_icon"
                     android:tint="@color/colorTextPrimary"
-                    android:layout_margin="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="19dp"
                     android:contentDescription="@string/email"/>
 
-                <EditText
-                    android:id="@+id/sign_in_email"
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:inputType="textEmailAddress"
-                    android:textColorHint="@color/colorTextPrimary"
-                    android:textSize="@dimen/text_body"
-                    android:hint="@string/email"
-                    android:textColor="@color/colorTextPrimary"
-                    android:background="@null"/>
-            </LinearLayout>
+                    android:layout_height="wrap_content"
+                    app:hintEnabled="true"
+                    app:errorEnabled="true">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/divider_size"
-                android:background="@color/colorDivider"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp">
-            </View>
+                    <EditText
+                        android:id="@+id/email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textEmailAddress"
+                        android:hint="@string/email"
+                        android:textColor="@color/colorTextPrimary"/>
+
+                </android.support.design.widget.TextInputLayout>
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -106,19 +122,26 @@
                     android:layout_width="@dimen/icon_size"
                     android:layout_height="@dimen/icon_size"
                     android:src="@drawable/password_icon"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="19dp"
                     android:tint="@color/colorTextPrimary"
-                    android:layout_margin="16dp"
                     android:contentDescription="@string/password"/>
 
-                <EditText
-                    android:id="@+id/sign_in_password"
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:inputType="textPassword"
-                    android:textColorHint="@color/colorTextPrimary"
-                    android:textSize="@dimen/text_body"
-                    android:hint="@string/password"
-                    android:background="@null"/>
+                    android:layout_height="wrap_content"
+                    app:hintEnabled="true"
+                    app:errorEnabled="true">
+
+                    <EditText
+                        android:id="@+id/password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword"
+                        android:hint="@string/password"
+                        android:textColor="@color/colorTextPrimary"/>
+
+                </android.support.design.widget.TextInputLayout>
 
             </LinearLayout>
 
@@ -139,6 +162,7 @@
             android:backgroundTint="@color/colorPrimary"
             android:textColor="@android:color/white"
             android:text="@string/sign_in"
+            android:textSize="16sp"
             android:layout_gravity="center_horizontal"
             android:onClick="signIn"/>
 

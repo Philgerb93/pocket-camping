@@ -2,6 +2,7 @@ package com.philippegerbeau.pocketcamping.activities;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +14,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.philippegerbeau.pocketcamping.R;
+
+import org.w3c.dom.Text;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -35,10 +38,10 @@ public class SignUpActivity extends AppCompatActivity {
 
         fbAuth = FirebaseAuth.getInstance();
 
-        signUpUsername = (EditText) findViewById(R.id.sign_up_username);
-        signUpEmail = (EditText) findViewById(R.id.sign_up_email);
-        signUpPassword = (EditText) findViewById(R.id.sign_up_password);
-        signUpConfirmPassword = (EditText) findViewById(R.id.sign_up_confirm_password);
+        signUpUsername = (EditText) findViewById(R.id.username);
+        signUpEmail = (EditText) findViewById(R.id.email);
+        signUpPassword = (EditText) findViewById(R.id.password);
+        signUpConfirmPassword = (EditText) findViewById(R.id.confirm);
     }
 
     public void signUp(View view) {
@@ -68,13 +71,17 @@ public class SignUpActivity extends AppCompatActivity {
         boolean valid = false;
 
         if (!validName()) {
-            signUpUsername.setError(getString(R.string.invalid_username));
+            TextInputLayout usernameParent = (TextInputLayout) findViewById(R.id.username_parent);
+            usernameParent.setError(getString(R.string.invalid_username));
         } else if (!validEmail()) {
-            signUpEmail.setError(getString(R.string.invalid_email));
+            TextInputLayout emailParent = (TextInputLayout) findViewById(R.id.email_parent);
+            emailParent.setError(getString(R.string.invalid_email));
         } else if (!validPassword()) {
-            signUpPassword.setError(getString(R.string.invalid_password));
+            TextInputLayout passwordParent = (TextInputLayout) findViewById(R.id.password_parent);
+            passwordParent.setError(getString(R.string.invalid_password));
         } else if (!validPasswordConfirm()) {
-            signUpConfirmPassword.setError(getString(R.string.invalid_confirm));
+            TextInputLayout confirmParent = (TextInputLayout) findViewById(R.id.confirm_parent);
+            confirmParent.setError(getString(R.string.invalid_confirm));
         } else {
             valid = true;
         }
