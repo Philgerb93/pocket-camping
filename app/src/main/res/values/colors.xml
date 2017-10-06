@@ -10,4 +10,6 @@
 
     <color name="bannerFilter">#60FFFFFF</color>
     <color name="transparentStatusBar">#30000000</color>
+
+    <color name="alertPulse">#FF5252</color>
 </resources>

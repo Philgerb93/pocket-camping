@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Pocket Camping</string>
 
+    <!-- Sign in activity -->
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="forgot_password">Forgot password?</string>
@@ -8,6 +9,7 @@
     <string name="no_account">No account?</string>
     <string name="auth_failed">Authentication failed</string>
 
+    <!-- Sign out activity -->
     <string name="username">Username</string>
     <string name="confirm_password">Confirm password</string>
     <string name="sign_up">Sign up</string>
@@ -16,4 +18,11 @@
     <string name="invalid_email">Invalid email</string>
     <string name="invalid_password">Min password length:</string>
     <string name="invalid_confirm">Password fields must match</string>
+
+    <!-- No stay activity -->
+    <string name="no_stay">No stay planned</string>
+    <string name="plan">Start planning!</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

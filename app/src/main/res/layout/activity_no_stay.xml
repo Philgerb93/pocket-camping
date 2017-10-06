@@ -7,9 +7,100 @@
     tools:context="com.philippegerbeau.pocketcamping.activities.NoStayActivity"
     android:background="@color/colorBackground">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/no_stay_img"
+        android:paddingStart="64dp"
+        android:paddingEnd="64dp"
+        android:layout_marginTop="20dp"
+        tools:ignore="ContentDescription"/>
+
     <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:fabSize="normal"/>
+        app:fabSize="normal"
+        android:src="@drawable/add_icon"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="32dp"/>
+
+    <ImageView
+        android:id="@+id/arrow"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/arrow_img"
+        android:tint="@color/colorTextPrimary"
+        android:layout_marginBottom="20dp"
+        android:layout_above="@+id/fab"
+        android:layout_alignEnd="@+id/fab"
+        tools:ignore="ContentDescription"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_above="@+id/arrow"
+        android:layout_marginBottom="20dp"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_stay"
+            android:textSize="26sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/plan"
+            android:textSize="20sp"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:padding="8dp"
+        android:layout_alignParentEnd="true"
+        android:clickable="true"
+        android:layout_margin="16dp">
+
+        <ImageButton
+            android:id="@+id/alert_icon"
+            android:layout_width="@dimen/alert_size"
+            android:layout_height="@dimen/alert_size"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/alert_icon"
+            android:tint="@color/colorPrimaryDark"
+            android:background="?attr/selectableItemBackgroundBorderless"/>
+
+        <ImageButton
+            android:id="@+id/alert_pulse"
+            android:layout_width="@dimen/alert_size"
+            android:layout_height="@dimen/alert_size"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/alert_icon"
+            android:tint="@color/colorPrimaryLight"
+            android:background="?attr/selectableItemBackgroundBorderless"/>
+
+        <TextView
+            android:id="@+id/alert_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@id/alert_icon"
+            android:layout_centerVertical="true"
+            android:text="New invitation"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            android:layout_marginEnd="4dp"/>
+
+    </RelativeLayout>
 
 </RelativeLayout>
