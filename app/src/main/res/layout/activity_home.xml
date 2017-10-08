@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.philippegerbeau.pocketcamping.activities.HomeActivity"
     android:background="@color/colorBackground">
 
@@ -13,14 +12,52 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/navigation" />
 
-    <android.support.design.widget.BottomNavigationView
+    <LinearLayout
         android:id="@+id/navigation"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:layout_gravity="start"
         android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
         android:background="@color/colorBackground"
-        app:elevation="12dp"
-        app:menu="@menu/bottom_nav" />
+        android:elevation="12dp">
+
+        <ImageButton
+            android:id="@+id/action_home"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="16dp"
+            android:src="@drawable/home_icon"
+            android:tint="@color/colorPrimary"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:scaleType="fitCenter"
+            android:onClick="navigate"/>
+
+        <ImageButton
+            android:id="@+id/action_alerts"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/alert_icon"
+            android:padding="16dp"
+            android:layout_weight="1"
+            android:tint="@color/colorTextPrimary"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:scaleType="fitCenter"
+            android:onClick="navigate"/>
+
+        <ImageButton
+            android:id="@+id/action_profile"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="16dp"
+            android:src="@drawable/user_icon"
+            android:tint="@color/colorTextPrimary"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:scaleType="fitCenter"
+            android:onClick="navigate"/>
+
+    </LinearLayout>
 
 </RelativeLayout>
