@@ -21,28 +21,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         fbUser = FirebaseAuth.getInstance().getCurrentUser();
-        fbRootRef = FirebaseDatabase.getInstance().getReference().child("users");
+        fbRootRef = FirebaseDatabase.getInstance().getReference();
 
-        if (fbUser == null) {
-            Intent i = new Intent(this, SignInActivity.class);
-            startActivity(i);
+        Intent i;
+        if (fbUser != null) {
+            System.out.println("USER ID: " + fbUser.getUid());
+            i = new Intent(this, HomeActivity.class);
         } else {
-            String userID = fbUser.getUid();
-            fbRootRef.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot snapshot) {
-                    Intent i;
-                    if (snapshot.hasChild("stayID")) {
-                        i = new Intent(MainActivity.this, HomeActivity.class);
-                    } else {
-                        i = new Intent(MainActivity.this, NoStayActivity.class);
-                    }
-                    startActivity(i);
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {}
-            });
+            i = new Intent(this, SignInActivity.class);
         }
+        startActivity(i);
     }
 }

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.google.firebase.database.FirebaseDatabase;
 import com.philippegerbeau.pocketcamping.R;
 import com.philippegerbeau.pocketcamping.fragments.AlertsFragment;
 import com.philippegerbeau.pocketcamping.fragments.ProfileFragment;

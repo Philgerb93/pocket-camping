@@ -23,7 +23,6 @@ import com.philippegerbeau.pocketcamping.R;
 public class SignInActivity extends AppCompatActivity {
     private FirebaseAuth fbAuth;
     private FirebaseUser fbUser;
-    private DatabaseReference fbRootRef;
 
     private EditText signInEmail;
     private EditText signInPassword;
@@ -35,7 +34,6 @@ public class SignInActivity extends AppCompatActivity {
 
         fbAuth = FirebaseAuth.getInstance();
         fbUser = fbAuth.getCurrentUser();
-        fbRootRef = FirebaseDatabase.getInstance().getReference();
 
         signInEmail = (EditText) findViewById(R.id.email);
         signInPassword = (EditText) findViewById(R.id.password);
@@ -50,9 +48,9 @@ public class SignInActivity extends AppCompatActivity {
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                            System.out.println("WERE IN");
                             if (task.isSuccessful() && fbUser != null) {
-                                nextActivity();
+                                Intent i = new Intent(SignInActivity.this, HomeActivity.class);
+                                startActivity(i);
                                 finish();
                             } else {
                                 Toast.makeText(SignInActivity.this, getString(R.string.auth_failed),
@@ -68,25 +66,6 @@ public class SignInActivity extends AppCompatActivity {
     private boolean validForm() {
         return signInEmail.getText().toString().length() > 0 &&
                 signInPassword.getText().toString().length() > 0;
-    }
-
-    private void nextActivity() {
-        String userID = fbUser.getUid();
-        fbRootRef.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                Intent i;
-                if (snapshot.hasChild("stayID")) {
-                    i = new Intent(SignInActivity.this, HomeActivity.class);
-                } else {
-                    i = new Intent(SignInActivity.this, NoStayActivity.class);
-                }
-                startActivity(i);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {}
-        });
     }
 
     public void toSignUp(View view) {

@@ -13,6 +13,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.philippegerbeau.pocketcamping.R;
 
 import org.w3c.dom.Text;
@@ -30,7 +32,6 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText signUpPassword;
     private EditText signUpConfirmPassword;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +47,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     public void signUp(View view) {
         if (validForm()) {
+            final String username = signUpUsername.getText().toString();
             String email = signUpEmail.getText().toString();
             String password = signUpPassword.getText().toString();
             fbAuth.createUserWithEmailAndPassword(email, password)
@@ -53,6 +55,14 @@ public class SignUpActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
+                                UserProfileChangeRequest profileUpdates =
+                                        new UserProfileChangeRequest.Builder()
+                                        .setDisplayName(username).build();
+                                FirebaseUser fbUser = FirebaseAuth.getInstance().getCurrentUser();
+                                if (fbUser != null) {
+                                    fbUser.updateProfile(profileUpdates);
+                                }
+
                                 Toast.makeText(SignUpActivity.this,
                                         getString(R.string.account_created), Toast.LENGTH_SHORT)
                                         .show();
