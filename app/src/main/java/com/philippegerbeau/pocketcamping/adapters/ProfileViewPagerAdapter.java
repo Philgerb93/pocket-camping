@@ -15,6 +15,7 @@ public class ProfileViewPagerAdapter extends FragmentPagerAdapter {
     public ProfileViewPagerAdapter(FragmentManager fm, Context context){
         super(fm);
         this.context = context;
+        System.out.println("ADAPTER CREATED");
     }
 
     @Override

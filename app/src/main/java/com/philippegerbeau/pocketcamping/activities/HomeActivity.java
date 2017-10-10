@@ -14,10 +14,6 @@ import com.philippegerbeau.pocketcamping.fragments.ProfileFragment;
 import com.philippegerbeau.pocketcamping.fragments.StayFragment;
 
 public class HomeActivity extends AppCompatActivity {
-    Fragment stayFragment;
-    Fragment alertsFragment;
-    Fragment profileFragment;
-
     ImageButton homeButton;
     ImageButton alertsButton;
     ImageButton profileButton;
@@ -27,16 +23,12 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        stayFragment = new StayFragment();
-        alertsFragment = new AlertsFragment();
-        profileFragment = new ProfileFragment();
-
         homeButton = (ImageButton) findViewById(R.id.action_home);
         alertsButton = (ImageButton) findViewById(R.id.action_alerts);
         profileButton = (ImageButton) findViewById(R.id.action_profile);
 
-        getSupportFragmentManager().beginTransaction().replace(
-                R.id.fragment_container, stayFragment).commit();
+        getSupportFragmentManager().beginTransaction().add(
+                R.id.fragment_container, new StayFragment()).commit();
     }
 
     public void navigate(View view) {
@@ -55,7 +47,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private void toHome() {
         getSupportFragmentManager().beginTransaction().replace(
-                R.id.fragment_container, stayFragment).commit();
+                R.id.fragment_container, new StayFragment()).commit();
         homeButton.setColorFilter(ContextCompat.getColor(this, R.color.colorPrimary));
         alertsButton.setColorFilter(ContextCompat.getColor(this, R.color.colorTextPrimary));
         profileButton.setColorFilter(ContextCompat.getColor(this, R.color.colorTextPrimary));
@@ -63,7 +55,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private void toAlerts() {
         getSupportFragmentManager().beginTransaction().replace(
-                R.id.fragment_container, alertsFragment).commit();
+                R.id.fragment_container, new AlertsFragment()).commit();
 
         homeButton.setColorFilter(ContextCompat.getColor(this, R.color.colorTextPrimary));
         alertsButton.setColorFilter(ContextCompat.getColor(this, R.color.colorPrimary));
@@ -72,7 +64,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private void toProfile() {
         getSupportFragmentManager().beginTransaction().replace(
-                R.id.fragment_container, profileFragment).commit();
+                R.id.fragment_container, new ProfileFragment()).commit();
 
         homeButton.setColorFilter(ContextCompat.getColor(this, R.color.colorTextPrimary));
         alertsButton.setColorFilter(ContextCompat.getColor(this, R.color.colorTextPrimary));

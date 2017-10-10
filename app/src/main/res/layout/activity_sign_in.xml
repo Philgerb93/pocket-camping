@@ -32,13 +32,6 @@
 
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/divider_size"
-        android:background="@color/colorBackground"
-        android:layout_above="@id/sign_up_layout">
-    </View>
-
     <LinearLayout
         android:id="@+id/sign_up_layout"
         android:layout_width="match_parent"
@@ -70,6 +63,13 @@
             android:layout_marginEnd="16dp"
             android:onClick="toSignUp"/>
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_size"
+        android:background="@color/colorBackground"
+        android:layout_above="@id/sign_up_layout">
+    </View>
 
     <LinearLayout
         android:layout_width="match_parent"
