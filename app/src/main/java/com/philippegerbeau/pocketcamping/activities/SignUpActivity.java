@@ -15,6 +15,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.philippegerbeau.pocketcamping.R;
 
 import java.util.regex.Matcher;
@@ -46,7 +48,7 @@ public class SignUpActivity extends AppCompatActivity {
     public void signUp(View view) {
         if (validForm()) {
             final String username = signUpUsername.getText().toString();
-            String email = signUpEmail.getText().toString();
+            final String email = signUpEmail.getText().toString();
             String password = signUpPassword.getText().toString();
             fbAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -57,15 +59,20 @@ public class SignUpActivity extends AppCompatActivity {
                                         new UserProfileChangeRequest.Builder()
                                         .setDisplayName(username).build();
                                 FirebaseUser fbUser = FirebaseAuth.getInstance().getCurrentUser();
+
+                                String userID = "";
                                 if (fbUser != null) {
                                     fbUser.updateProfile(profileUpdates);
+                                    userID = fbUser.getUid();
                                 }
+
+                                storeEmail(userID);
 
                                 Toast.makeText(SignUpActivity.this,
                                         getString(R.string.account_created), Toast.LENGTH_SHORT)
                                         .show();
-                                Intent i = new Intent(SignUpActivity.this, SignInActivity.class);
-                                startActivity(i);
+
+                                toHome();
                             } else {
                                 Toast.makeText(SignUpActivity.this, getString(R.string.auth_failed),
                                         Toast.LENGTH_SHORT).show();
@@ -114,5 +121,17 @@ public class SignUpActivity extends AppCompatActivity {
     private boolean validPasswordConfirm() {
         return signUpPassword.getText().toString().trim().equals(
                 signUpConfirmPassword.getText().toString().trim());
+    }
+
+    private void storeEmail(String userID) {
+        DatabaseReference fbEmailRef = FirebaseDatabase.getInstance()
+                .getReference().child("emails");
+        String encodedEmail = signUpEmail.getText().toString().replace('.', ',');
+        fbEmailRef.child(encodedEmail).setValue(userID);
+    }
+
+    private void toHome() {
+        Intent i = new Intent(SignUpActivity.this, SignInActivity.class);
+        startActivity(i);
     }
 }
