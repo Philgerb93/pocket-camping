@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Pocket Camping</string>
 
-    <!-- Sign in activity -->
+    <!-- Sign In Activity -->
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="forgot_password">Forgot password?</string>
@@ -9,7 +9,7 @@
     <string name="no_account">No account?</string>
     <string name="auth_failed">Authentication failed</string>
 
-    <!-- Sign out activity -->
+    <!-- Sign Out Activity -->
     <string name="username">Username</string>
     <string name="confirm_password">Confirm password</string>
     <string name="sign_up">Sign up</string>
@@ -19,7 +19,12 @@
     <string name="invalid_password">Min password length:</string>
     <string name="invalid_confirm">Password fields must match</string>
 
-    <!-- No stay activity -->
+    <!-- Home Activity -->
+    <string name="home">Home</string>
+    <string name="alerts">Alerts</string>
+    <string name="profile">Profile</string>
+
+    <!-- No Stay Activity -->
     <string name="no_stay">No stay planned</string>
     <string name="plan">Start planning!</string>
 
@@ -28,5 +33,18 @@
     <string name="history">History</string>
     <string name="friends">Friends</string>
     <string name="no_plan">Nothing planned yet</string>
+
+    <!-- Stay Edit Activity -->
+    <string name="stay_creation">Stay creation</string>
+    <string name="stay_edit">Stay edit</string>
+    <string name="location">Location</string>
+    <string name="departure_date">Departure date</string>
+    <string name="arrival_date">Arrival date</string>
+    <string name="departure_time">Departure time</string>
+    <string name="arrival_time">Arrival time</string>
+    <string name="spot">Camping spot (Optional)</string>
+    <string name="confirm">Confirm</string>
+    <string name="invalid_location">Required</string>
+    <string name="invalid_date">Invalid date</string>
 
 </resources>

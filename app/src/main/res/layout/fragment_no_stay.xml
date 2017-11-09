@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.philippegerbeau.pocketcamping.activities.NoStayActivity"
-    android:background="@color/colorBackground">
+    tools:context="com.philippegerbeau.pocketcamping.fragments.NoStayFragment"
+    android:background="#40E8F5E9">
 
     <ImageView
         android:layout_width="match_parent"
@@ -24,7 +24,8 @@
         android:src="@drawable/add_icon"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="32dp"/>
+        android:layout_marginBottom="32dp"
+        android:onClick="stayCreation"/>
 
     <ImageView
         android:id="@+id/arrow"
@@ -60,47 +61,5 @@
             android:textSize="20sp"/>
 
     </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:padding="8dp"
-        android:layout_alignParentEnd="true"
-        android:clickable="true"
-        android:layout_margin="16dp">
-
-        <ImageButton
-            android:id="@+id/alert_icon"
-            android:layout_width="@dimen/alert_size"
-            android:layout_height="@dimen/alert_size"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/alert_icon"
-            android:tint="@color/colorPrimaryDark"
-            android:background="?attr/selectableItemBackgroundBorderless"/>
-
-        <ImageButton
-            android:id="@+id/alert_pulse"
-            android:layout_width="@dimen/alert_size"
-            android:layout_height="@dimen/alert_size"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/alert_icon"
-            android:tint="@color/colorPrimaryLight"
-            android:background="?attr/selectableItemBackgroundBorderless"/>
-
-        <TextView
-            android:id="@+id/alert_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toStartOf="@id/alert_icon"
-            android:layout_centerVertical="true"
-            android:text="New invitation"
-            android:textColor="@color/colorPrimary"
-            android:textStyle="bold"
-            android:layout_marginEnd="4dp"/>
-
-    </RelativeLayout>
 
 </RelativeLayout>

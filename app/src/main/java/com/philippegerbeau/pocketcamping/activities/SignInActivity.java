@@ -13,11 +13,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.philippegerbeau.pocketcamping.R;
 
 public class SignInActivity extends AppCompatActivity {
@@ -35,8 +30,8 @@ public class SignInActivity extends AppCompatActivity {
         fbAuth = FirebaseAuth.getInstance();
         fbUser = fbAuth.getCurrentUser();
 
-        signInEmail = (EditText) findViewById(R.id.email);
-        signInPassword = (EditText) findViewById(R.id.password);
+        signInEmail = findViewById(R.id.email);
+        signInPassword = findViewById(R.id.password);
     }
 
     public void signIn(View view) {

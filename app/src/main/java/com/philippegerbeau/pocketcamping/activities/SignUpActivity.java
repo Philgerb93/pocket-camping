@@ -17,8 +17,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.philippegerbeau.pocketcamping.R;
 
-import org.w3c.dom.Text;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -39,10 +37,10 @@ public class SignUpActivity extends AppCompatActivity {
 
         fbAuth = FirebaseAuth.getInstance();
 
-        signUpUsername = (EditText) findViewById(R.id.username);
-        signUpEmail = (EditText) findViewById(R.id.email);
-        signUpPassword = (EditText) findViewById(R.id.password);
-        signUpConfirmPassword = (EditText) findViewById(R.id.confirm);
+        signUpUsername = findViewById(R.id.username);
+        signUpEmail = findViewById(R.id.email);
+        signUpPassword = findViewById(R.id.password);
+        signUpConfirmPassword = findViewById(R.id.confirm);
     }
 
     public void signUp(View view) {
@@ -81,16 +79,16 @@ public class SignUpActivity extends AppCompatActivity {
         boolean valid = false;
 
         if (!validName()) {
-            TextInputLayout usernameParent = (TextInputLayout) findViewById(R.id.username_parent);
+            TextInputLayout usernameParent = findViewById(R.id.username_parent);
             usernameParent.setError(getString(R.string.invalid_username));
         } else if (!validEmail()) {
-            TextInputLayout emailParent = (TextInputLayout) findViewById(R.id.email_parent);
+            TextInputLayout emailParent = findViewById(R.id.email_parent);
             emailParent.setError(getString(R.string.invalid_email));
         } else if (!validPassword()) {
-            TextInputLayout passwordParent = (TextInputLayout) findViewById(R.id.password_parent);
+            TextInputLayout passwordParent = findViewById(R.id.password_parent);
             passwordParent.setError(getString(R.string.invalid_password));
         } else if (!validPasswordConfirm()) {
-            TextInputLayout confirmParent = (TextInputLayout) findViewById(R.id.confirm_parent);
+            TextInputLayout confirmParent = findViewById(R.id.confirm_parent);
             confirmParent.setError(getString(R.string.invalid_confirm));
         } else {
             valid = true;

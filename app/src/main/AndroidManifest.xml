@@ -21,7 +21,7 @@
         <activity android:name=".activities.SignInActivity" />
         <activity android:name=".activities.SignUpActivity" />
         <activity android:name=".activities.HomeActivity" />
-        <activity android:name=".activities.NoStayActivity" />
+        <activity android:name=".activities.StayEditActivity"></activity>
     </application>
 
 </manifest>

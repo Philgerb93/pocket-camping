@@ -78,18 +78,21 @@ public class ProfileFragment extends Fragment {
     }
 
     private void setStatus(DataSnapshot dataSnapshot) {
-        String stayID = dataSnapshot.child("stayID").getValue().toString();
-        DatabaseReference fbStayRef = FirebaseDatabase.getInstance()
-                .getReference().child("stays").child(stayID);
+        String stayID = (String) dataSnapshot.child("stayID").getValue();
 
-        fbStayRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                status.setText(dataSnapshot.child("name").getValue().toString());
-            }
+        if (stayID != null) {
+            DatabaseReference fbStayRef = FirebaseDatabase.getInstance()
+                    .getReference().child("stays").child(stayID);
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {}
-        });
+            fbStayRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    status.setText((String) dataSnapshot.child("location").getValue());
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {}
+            });
+        }
     }
 }

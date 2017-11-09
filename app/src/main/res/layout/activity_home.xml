@@ -32,6 +32,7 @@
             android:tint="@color/colorPrimary"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:scaleType="fitCenter"
+            android:contentDescription="@string/home"
             android:onClick="navigate"/>
 
         <ImageButton
@@ -44,6 +45,7 @@
             android:tint="@color/colorTextPrimary"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:scaleType="fitCenter"
+            android:contentDescription="@string/alerts"
             android:onClick="navigate"/>
 
         <ImageButton
@@ -56,6 +58,7 @@
             android:tint="@color/colorTextPrimary"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:scaleType="fitCenter"
+            android:contentDescription="@string/profile"
             android:onClick="navigate"/>
 
     </LinearLayout>
