@@ -19,7 +19,7 @@ public class NoStayFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_no_stay, container, false);
-        fab = view.findViewById(R.id.fab);
+        fab = view.findViewById(R.id.creation_fab);
 
         return view;
     }

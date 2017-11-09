@@ -1,5 +1,6 @@
 package com.philippegerbeau.pocketcamping.activities;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -112,7 +113,11 @@ public class HomeActivity extends AppCompatActivity {
         profileButton.setColorFilter(ContextCompat.getColor(this, R.color.colorPrimary));
     }
 
-    public void stayCreation(View view) {
-        ((NoStayFragment) stayFragment).stayCreation(view);
+    public void stayEdit(View view) {
+        if (view.getId() == R.id.creation_fab) {
+            ((NoStayFragment)stayFragment).stayCreation(view);
+        } else {
+            ((StayFragment)stayFragment).stayEdit(view);
+        }
     }
 }
