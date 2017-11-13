@@ -21,7 +21,8 @@
         <activity android:name=".activities.SignInActivity" />
         <activity android:name=".activities.SignUpActivity" />
         <activity android:name=".activities.HomeActivity" />
-        <activity android:name=".activities.StayEditActivity"></activity>
+        <activity android:name=".activities.StayEditActivity" />
+        <activity android:name=".activities.ItemsActivity"></activity>
     </application>
 
 </manifest>

@@ -7,80 +7,189 @@
     tools:context="com.philippegerbeau.pocketcamping.activities.HomeActivity"
     android:background="@color/colorBackground">
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="0dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignBottom="@id/anchor">
 
-        <FrameLayout
+        <ImageView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/home_banner"
-                android:foreground="@color/bannerFilter"
-                android:scaleType="centerCrop"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:gravity="center">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Mont Orford"
-                    android:textSize="@dimen/text_header"/>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="20 juillet 2017"
-                        android:textSize="@dimen/text_sub_header"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=" - "
-                        tools:ignore="HardcodedText"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="24 juillet 2017"
-                        android:textSize="@dimen/text_sub_header"/>
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Emplacement C-137"
-                    android:textSize="@dimen/text_app_bar"
-                    android:layout_marginTop="16dp"/>
-
-            </LinearLayout>
-
-
-        </FrameLayout>
+            android:layout_height="match_parent"
+            android:src="@drawable/home_banner"
+            android:foreground="@color/bannerFilter"
+            android:scaleType="centerCrop"
+            tools:ignore="ContentDescription"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mont Orford"
+                android:textSize="@dimen/text_header"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="20 juillet 2017"
+                    android:textSize="@dimen/text_sub_header"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" - "
+                    tools:ignore="HardcodedText"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="24 juillet 2017"
+                    android:textSize="@dimen/text_sub_header"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Emplacement C-137"
+                android:textSize="@dimen/text_app_bar"
+                android:layout_marginTop="16dp"/>
+
         </LinearLayout>
+
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/light_banner"
+        android:padding="16dp"
+        android:gravity="center"
+        android:baselineAligned="false">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:onClick="toItems">
+
+            <ProgressBar
+                android:id="@+id/items_pb"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:indeterminate="false"
+                android:progressDrawable="@drawable/progress_bar"
+                android:background="@drawable/progress_bar_bg"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:max="100"
+                android:progress="65"
+                android:layout_centerHorizontal="true"/>
+
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/items_icon"
+                android:tint="@color/colorPrimary"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="52dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3 / 8"
+                android:textSize="18sp"
+                android:textColor="@color/colorPrimary"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/items_pb"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:onClick="toMeals">
+
+            <ProgressBar
+                android:id="@+id/meals_pb"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:indeterminate="false"
+                android:progressDrawable="@drawable/progress_bar"
+                android:background="@drawable/progress_bar_bg"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:max="100"
+                android:progress="65"
+                android:layout_centerHorizontal="true"/>
+
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/meals_icon"
+                android:tint="@color/colorPrimary"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="52dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3 / 8"
+                android:textSize="18sp"
+                android:textColor="@color/colorPrimary"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/meals_pb"/>
+
+        </RelativeLayout>
 
     </LinearLayout>
 
+    <View
+        android:id="@+id/anchor"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerInParent="true">
+    </View>
+
+    <FrameLayout
+        android:id="@+id/light_banner"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/anchor">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Temps restant: 4 jours"
+            android:textSize="18sp"
+            android:layout_gravity="center"/>
+
+    </FrameLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorDivider"
+        android:layout_below="@id/light_banner">
+    </View>
+
     <android.support.design.widget.FloatingActionButton
+        android:id="@+id/edit_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:fabSize="normal"
@@ -88,6 +197,7 @@
         android:layout_centerVertical="true"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="16dp"
+        tools:ignore="all"
         android:onClick="stayEdit"/>
 
 </RelativeLayout>

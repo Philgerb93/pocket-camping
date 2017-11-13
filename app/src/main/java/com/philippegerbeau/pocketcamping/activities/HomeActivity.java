@@ -1,6 +1,5 @@
 package com.philippegerbeau.pocketcamping.activities;
 
-import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -119,5 +118,13 @@ public class HomeActivity extends AppCompatActivity {
         } else {
             ((StayFragment)stayFragment).stayEdit(view);
         }
+    }
+
+    public void toItems(View view) {
+        ((StayFragment) stayFragment).toItems(view);
+    }
+
+    public void toMeals(View view) {
+        ((StayFragment) stayFragment).toMeals(view);
     }
 }

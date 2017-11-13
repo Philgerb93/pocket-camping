@@ -89,8 +89,7 @@
                 android:id="@+id/tab_layout"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:layout_below="@+id/status"
-                android:elevation="8dp">
+                android:layout_below="@+id/status">
             </android.support.design.widget.TabLayout>
 
         </RelativeLayout>
