@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.philippegerbeau.pocketcamping.activities.ItemsActivity">
+
+    <ExpandableListView
+        android:id="@+id/exp_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@null"
+        android:groupIndicator="@null">
+    </ExpandableListView>
+    
+    <LinearLayout
+        android:id="@+id/input_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/colorBackground"
+        android:layout_alignParentBottom="true"
+        android:elevation="12dp"
+        android:visibility="invisible">
+
+        <com.philippegerbeau.pocketcamping.InteractiveEditText
+            android:id="@+id/int_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textCapWords"
+            android:maxLines="1"
+            android:maxLength="20"
+            android:background="@android:color/transparent"
+            android:paddingTop="16dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:imeOptions="actionDone"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+            </View>
+
+            <ImageButton
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/submit_icon"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:tint="@color/colorTextPrimary"
+                android:scaleType="fitCenter"
+                android:padding="8dp"
+                android:layout_margin="8dp"
+                android:onClick="submit"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:fabSize="normal"
+        android:src="@drawable/container_icon"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="32dp"
+        android:onClick="startInput"/>
+
+</RelativeLayout>

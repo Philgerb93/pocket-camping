@@ -47,4 +47,8 @@
     <string name="invalid_location">Required</string>
     <string name="invalid_date">Invalid date</string>
 
+    <!-- Items Activity -->
+    <string name="new_container">New container</string>
+    <string name="new_item">New item</string>
+
 </resources>
