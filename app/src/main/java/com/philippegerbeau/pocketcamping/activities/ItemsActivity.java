@@ -9,15 +9,19 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.philippegerbeau.pocketcamping.Container;
+import com.google.firebase.database.ServerValue;
+import com.philippegerbeau.pocketcamping.data.Alert;
+import com.philippegerbeau.pocketcamping.data.Container;
 import com.philippegerbeau.pocketcamping.Handler;
 import com.philippegerbeau.pocketcamping.InteractiveEditText;
-import com.philippegerbeau.pocketcamping.Item;
+import com.philippegerbeau.pocketcamping.data.Item;
 import com.philippegerbeau.pocketcamping.R;
 import com.philippegerbeau.pocketcamping.adapters.ExpListAdapter;
 
@@ -46,15 +50,6 @@ public class ItemsActivity extends AppCompatActivity {
         expListAdapter = new ExpListAdapter(this, containers);
         expListView = findViewById(R.id.exp_list_view);
         expListView.setAdapter(expListAdapter);
-
-        /*expListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
-            @Override
-            public boolean onGroupClick(ExpandableListView parent, View v,
-                                        int groupPosition, long id) {
-                System.out.println("CLICKED");
-                return true; // This way the expander cannot be collapsed
-            }
-        });*/
 
         fbStayRef = FirebaseDatabase.getInstance().getReference()
                 .child("stays").child(Handler.user.getStayID());
@@ -127,13 +122,17 @@ public class ItemsActivity extends AppCompatActivity {
         String input = intEditText.getText().toString();
 
         if (input.length() > 0) {
-            if (expListAdapter.getContainerID() == null) {
+            if (expListAdapter.getModContainer() == null) {
                 String key = fbStayRef.child("containers").push().getKey();
                 fbStayRef.child("containers").child(key).setValue(new Container(input, key));
+                Alert.log(Alert.ADDED, Alert.CAT_ITEMS, input);
             } else {
-                fbStayRef.child("containers").child(expListAdapter.getContainerID())
+                String containerID = expListAdapter.getModContainer().getKey();
+                fbStayRef.child("containers").child(containerID)
                         .child("items").push().setValue(new Item(input));
-                expListAdapter.resetContainerID();
+                Alert.log(Alert.ADDED, Alert.CAT_ITEMS, input,
+                        expListAdapter.getModContainer().getName());
+                expListAdapter.resetModContainer();
             }
 
             stopInput();

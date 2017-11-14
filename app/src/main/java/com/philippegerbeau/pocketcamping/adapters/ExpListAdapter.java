@@ -9,8 +9,8 @@ import android.widget.ExpandableListView;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.philippegerbeau.pocketcamping.Container;
-import com.philippegerbeau.pocketcamping.Item;
+import com.philippegerbeau.pocketcamping.data.Container;
+import com.philippegerbeau.pocketcamping.data.Item;
 import com.philippegerbeau.pocketcamping.R;
 import com.philippegerbeau.pocketcamping.activities.ItemsActivity;
 
@@ -23,7 +23,7 @@ public class ExpListAdapter extends BaseExpandableListAdapter {
     private Context context;
     private ArrayList<Container> containers;
 
-    private String containerID;
+    private Container modifiedContainer;
 
     public ExpListAdapter(Context context, ArrayList<Container> containers) {
         this.context = context;
@@ -98,7 +98,7 @@ public class ExpListAdapter extends BaseExpandableListAdapter {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                containerID = ((Container)getGroup(i)).getKey();
+                modifiedContainer = (Container)getGroup(i);
                 ((ItemsActivity) context).startInput(v);
             }
         });
@@ -128,11 +128,11 @@ public class ExpListAdapter extends BaseExpandableListAdapter {
         return false;
     }
 
-    public void resetContainerID() {
-        containerID = null;
+    public void resetModContainer() {
+        modifiedContainer = null;
     }
 
-    public String getContainerID() {
-        return containerID;
+    public Container getModContainer() {
+        return modifiedContainer;
     }
 }

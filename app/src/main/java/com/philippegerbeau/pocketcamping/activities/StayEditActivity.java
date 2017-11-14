@@ -4,7 +4,6 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.support.design.widget.TextInputEditText;
-import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -19,7 +18,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.philippegerbeau.pocketcamping.Handler;
 import com.philippegerbeau.pocketcamping.R;
+import com.philippegerbeau.pocketcamping.data.Alert;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -28,8 +29,6 @@ import java.util.Locale;
 public class StayEditActivity extends AppCompatActivity {
     private final String DATE_FORMAT = "d MMM yyyy";
     private final String TIME_FORMAT = "HH:mm";
-
-    private String stayID;
 
     private TextInputEditText location;
     private TextInputEditText arrivalDate;
@@ -78,7 +77,6 @@ public class StayEditActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.child("stayID").exists()) {
-                    stayID = (String) dataSnapshot.child("stayID").getValue();
                     setExistingData();
                 }
             }
@@ -90,7 +88,7 @@ public class StayEditActivity extends AppCompatActivity {
 
     private void setExistingData() {
         DatabaseReference fbStayRef = FirebaseDatabase.getInstance().getReference()
-                .child("stays").child(stayID);
+                .child("stays").child(Handler.user.getStayID());
 
         fbStayRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -224,13 +222,14 @@ public class StayEditActivity extends AppCompatActivity {
         DatabaseReference fbUserRef = FirebaseDatabase.getInstance().getReference()
                 .child("users").child(userID);
 
-        if (stayID == null) {
-            stayID = fbUserRef.push().getKey();
-            fbUserRef.child("stayID").setValue(stayID);
+        if (Handler.user.getStayID() == null) {
+            Handler.user.setstayID(fbUserRef.push().getKey());
+            fbUserRef.child("stayID").setValue(Handler.user.getStayID());
+            Alert.log(Alert.CREATED, Alert.CAT_STAY, location.getText().toString());
         }
 
         DatabaseReference fbStayRef = FirebaseDatabase.getInstance().getReference()
-                .child("stays").child(stayID);
+                .child("stays").child(Handler.user.getStayID());
         fbStayRef.child("location").setValue(location.getText().toString());
         fbStayRef.child("arrival").setValue(calArrival.getTimeInMillis());
         fbStayRef.child("departure").setValue(calDeparture.getTimeInMillis());

@@ -24,7 +24,7 @@ public class NoStayFragment extends Fragment {
         return view;
     }
 
-    public void stayCreation(View view) {
+    public void stayEdit(View view) {
         Intent i = new Intent(getActivity(), StayEditActivity.class);
         startActivity(i);
     }

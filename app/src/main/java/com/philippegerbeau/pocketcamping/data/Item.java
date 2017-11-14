@@ -1,4 +1,4 @@
-package com.philippegerbeau.pocketcamping;
+package com.philippegerbeau.pocketcamping.data;
 
 public class Item {
     private String name;

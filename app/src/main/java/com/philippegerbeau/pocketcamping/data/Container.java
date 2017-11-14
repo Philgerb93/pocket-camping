@@ -1,4 +1,4 @@
-package com.philippegerbeau.pocketcamping;
+package com.philippegerbeau.pocketcamping.data;
 
 import com.google.firebase.database.Exclude;
 

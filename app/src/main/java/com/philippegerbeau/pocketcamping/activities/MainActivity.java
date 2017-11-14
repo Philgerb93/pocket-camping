@@ -8,6 +8,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.philippegerbeau.pocketcamping.Handler;
 
 public class MainActivity extends AppCompatActivity {
     FirebaseUser fbUser;
@@ -22,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
         Intent i;
         if (fbUser != null) {
-            System.out.println("USER ID: " + fbUser.getUid());
+            Handler.init();
             i = new Intent(this, HomeActivity.class);
         } else {
             i = new Intent(this, SignInActivity.class);

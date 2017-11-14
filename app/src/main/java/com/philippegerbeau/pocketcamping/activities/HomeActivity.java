@@ -114,7 +114,7 @@ public class HomeActivity extends AppCompatActivity {
 
     public void stayEdit(View view) {
         if (view.getId() == R.id.creation_fab) {
-            ((NoStayFragment)stayFragment).stayCreation(view);
+            ((NoStayFragment)stayFragment).stayEdit(view);
         } else {
             ((StayFragment)stayFragment).stayEdit(view);
         }
