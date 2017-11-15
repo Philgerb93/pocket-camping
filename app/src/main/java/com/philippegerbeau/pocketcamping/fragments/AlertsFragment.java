@@ -23,7 +23,7 @@ import com.philippegerbeau.pocketcamping.data.Container;
 import java.util.ArrayList;
 
 public class AlertsFragment extends Fragment {
-    ArrayList<Alert> alerts;
+    private ArrayList<Alert> alerts;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

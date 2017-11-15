@@ -6,10 +6,61 @@
     tools:context="com.philippegerbeau.pocketcamping.fragments.FriendsFragment"
     android:orientation="vertical">
 
+    <LinearLayout
+        android:id="@+id/invite_panel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/colorPrimaryLight"
+        android:elevation="3dp"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorTextPrimary"
+            android:textSize="18sp"
+            android:textAlignment="center"
+            android:paddingTop="16dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+            </View>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/decline"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold"
+                style="?attr/borderlessButtonStyle"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/accept"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold"
+                style="?attr/borderlessButtonStyle"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
     <ListView
         android:id="@+id/list_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/invite_panel">
     </ListView>
 
     <android.support.design.widget.FloatingActionButton
@@ -17,9 +68,71 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:fabSize="normal"
-        android:src="@drawable/add_icon"
+        android:src="@drawable/add_friend_icon"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_margin="32dp"/>
+        android:layout_margin="32dp"
+        android:onClick="addFriend"/>
+
+    <TextView
+        android:id="@+id/no_friends"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/no_friends"
+        android:textColor="@color/colorTextPrimary"
+        android:textSize="26sp"
+        android:layout_centerInParent="true"
+        android:visibility="invisible"/>
+
+    <LinearLayout
+        android:id="@+id/input_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/colorBackground"
+        android:layout_alignParentBottom="true"
+        android:elevation="12dp"
+        android:visibility="invisible">
+
+        <com.philippegerbeau.pocketcamping.InteractiveEditText
+            android:id="@+id/int_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:hint="@string/email"
+            android:maxLines="1"
+            android:maxLength="20"
+            android:background="@android:color/transparent"
+            android:paddingTop="16dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:imeOptions="actionDone"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+            </View>
+
+            <ImageButton
+                android:id="@+id/submit_button"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/submit_icon"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:tint="@color/colorTextPrimary"
+                android:scaleType="fitCenter"
+                android:padding="8dp"
+                android:layout_margin="8dp"
+                android:onClick="submit"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </RelativeLayout>

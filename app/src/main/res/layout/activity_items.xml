@@ -5,12 +5,42 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.philippegerbeau.pocketcamping.activities.ItemsActivity">
+    
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:elevation="4dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Items"
+                android:layout_gravity="center_vertical"
+                android:textSize="24sp"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+            </View>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.Toolbar>
 
     <ExpandableListView
         android:id="@+id/exp_list_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:divider="@null"
+        android:layout_below="@id/toolbar"
         android:groupIndicator="@null">
     </ExpandableListView>
     
@@ -73,5 +103,28 @@
         android:layout_alignParentEnd="true"
         android:layout_margin="32dp"
         android:onClick="startInput"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <ImageButton
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@drawable/edit_icon"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:tint="@color/colorTextPrimary"
+            android:layout_weight="1"/>
+
+        <ImageButton
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@drawable/delete_icon"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:tint="@color/colorTextPrimary"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
 
 </RelativeLayout>

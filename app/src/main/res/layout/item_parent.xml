@@ -23,7 +23,7 @@
         android:layout_weight="1">
     </View>
 
-    <ImageButton
+    <ImageView
         android:id="@+id/add"
         android:layout_width="36dp"
         android:layout_height="36dp"
@@ -32,7 +32,10 @@
         android:scaleType="fitCenter"
         android:src="@drawable/add_icon"
         android:tint="@color/colorPrimaryDark"
-        android:background="?attr/selectableItemBackgroundBorderless"/>
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:clickable="true"/>
 
 
 </LinearLayout>

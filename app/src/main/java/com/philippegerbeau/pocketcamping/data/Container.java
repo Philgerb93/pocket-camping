@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Container {
+public class Container implements ListItem {
     private String name;
     private Map<String, Item> items = new HashMap<>();
     private String key;
@@ -22,8 +22,13 @@ public class Container {
         return name;
     }
 
-    public ArrayList<Item> getItems() {
+    @Exclude
+    public ArrayList<Item> getItemsList() {
         return new ArrayList<>(items.values());
+    }
+
+    public Map<String, Item> getItems() {
+        return items;
     }
 
     @Exclude

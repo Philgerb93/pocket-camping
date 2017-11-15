@@ -26,6 +26,11 @@ public class Alert {
     public static final int RENAMED = 5;
     public static final int CHECKED = 6;
     public static final int UNCHECKED = 7;
+    public static final int IMPORTED = 8;
+    public static final int CHECKED_ALL = 9;
+    public static final int UNCHECKED_ALL = 10;
+    public static final int DELETED_ALL = 11;
+
     public static final int CAT_STAY = 20;
     public static final int CAT_ITEMS = 21;
     public static final int CAT_MEALS = 22;
@@ -36,6 +41,10 @@ public class Alert {
     private String item1;
     private String item2;
     private long date;
+
+    public static void log(int action, int category) {
+        Alert.log(action, category, null, null);
+    }
 
     public static void log(int action, int category, String item1) {
         Alert.log(action, category, item1, null);
@@ -48,7 +57,9 @@ public class Alert {
         Map<String, Object> value = new HashMap<>();
         value.put("name", Handler.user.getName());
         value.put("action", action);
-        value.put("item1", item1);
+        if (item1 != null) {
+            value.put("item1", item1);
+        }
         if (item2 != null) {
             value.put("item2", item2);
         }
@@ -86,6 +97,14 @@ public class Alert {
                 return " " + context.getResources().getString(R.string.checked) + " ";
             case UNCHECKED:
                 return " " + context.getResources().getString(R.string.unchecked) + " ";
+            case IMPORTED:
+                return " " + context.getResources().getString(R.string.imported);
+            case CHECKED_ALL:
+                return " " + context.getResources().getString(R.string.checked_all);
+            case UNCHECKED_ALL:
+                return " " + context.getResources().getString(R.string.unchecked_all);
+            case DELETED_ALL:
+                return " " + context.getResources().getString(R.string.delete_all);
             default:
                 return null;
         }

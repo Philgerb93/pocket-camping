@@ -50,6 +50,22 @@
     <!-- Items Activity -->
     <string name="new_container">New container</string>
     <string name="new_item">New item</string>
+    <string name="save">Save preset</string>
+    <string name="load">Load preset</string>
+    <string name="check_all">Check all</string>
+    <string name="uncheck_all">Uncheck all</string>
+    <string name="delete_all">Delete all</string>
+    <string name="no_save">Nothing to save</string>
+    <string name="no_load">Nothing to load</string>
+    <string name="no_check">Nothing to check</string>
+    <string name="no_uncheck">Nothing to uncheck</string>
+    <string name="no_delete">Nothing to delete</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="confirm_save">This will override preexisting preset. Are you sure?</string>
+    <string name="confirm_load">This will replace all current items. Are you sure?</string>
+    <string name="confirm_check">Are you sure?</string>
+    <string name="his_preset">his preset</string>
 
     <!-- Alerts Fragment -->
     <string name="no_alerts">No alerts yet</string>
@@ -61,7 +77,20 @@
     <string name="renamed">renamed</string>
     <string name="checked">checked</string>
     <string name="unchecked">unchecked</string>
+    <string name="imported">imported from his preset</string>
+    <string name="checked_all">checked everything</string>
+    <string name="unchecked_all">unchecked everything</string>
+    <string name="deleted_all">deleted everything</string>
     <string name="to">to</string>
     <string name="in">in</string>
+
+    <!-- Friends Fragment -->
+    <string name="no_friends">No friends yet</string>
+    <string name="invitation_sent">Invitation sent</string>
+    <string name="invitation_failed">Invitation failed</string>
+    <string name="no_email">Email does not exist</string>
+    <string name="accept">Accept</string>
+    <string name="decline">Decline</string>
+    <string name="new_invite">New friend request from</string>
 
 </resources>
