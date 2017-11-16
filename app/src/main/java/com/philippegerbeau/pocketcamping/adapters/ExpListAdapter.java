@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.philippegerbeau.pocketcamping.data.Container;
@@ -57,7 +58,7 @@ public class ExpListAdapter extends BaseExpandableListAdapter {
     public Object getChild(int i, int i1) {
         Container container = (Container) getGroup(i);
 
-        Collections.sort(container.getItems(), new Comparator<Item>() {
+        Collections.sort(container.getItemsList(), new Comparator<Item>() {
             @Override
             public int compare(Item o1, Item o2) {
                 String nameO1 = Normalizer.normalize(o1.getName(), Normalizer.Form.NFD);
@@ -66,17 +67,17 @@ public class ExpListAdapter extends BaseExpandableListAdapter {
             }
         });
 
-        return container.getItems().get(i1);
+        return container.getItemsList().get(i1);
     }
 
     @Override
     public long getGroupId(int i) {
-        return 0;
+        return i;
     }
 
     @Override
     public long getChildId(int i, int i1) {
-        return 0;
+        return i;
     }
 
     @Override
@@ -93,7 +94,7 @@ public class ExpListAdapter extends BaseExpandableListAdapter {
         TextView name = itemParentView.findViewById(R.id.name);
         name.setText(((Container)getGroup(i)).getName());
 
-        ImageButton add = itemParentView.findViewById(R.id.add);
+        ImageView add = itemParentView.findViewById(R.id.add);
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,7 +126,7 @@ public class ExpListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public boolean isChildSelectable(int i, int i1) {
-        return false;
+        return true;
     }
 
     public void resetModContainer() {

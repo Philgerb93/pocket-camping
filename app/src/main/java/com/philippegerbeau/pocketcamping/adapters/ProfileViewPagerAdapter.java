@@ -11,10 +11,15 @@ import com.philippegerbeau.pocketcamping.fragments.HistoryFragment;
 
 public class ProfileViewPagerAdapter extends FragmentPagerAdapter {
     private Context context;
+    private Fragment historyFragment;
+    private Fragment friendsFragment;
 
-    public ProfileViewPagerAdapter(FragmentManager fm, Context context){
+    public ProfileViewPagerAdapter(FragmentManager fm, Context context,
+                                   Fragment histFrag, Fragment friendsFrag){
         super(fm);
         this.context = context;
+        this.historyFragment = histFrag;
+        this.friendsFragment = friendsFrag;
     }
 
     @Override
@@ -26,9 +31,9 @@ public class ProfileViewPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem (int position) {
         switch (position){
             case 0:
-                return new HistoryFragment();
+                return historyFragment;
             case 1:
-                return new FriendsFragment();
+                return friendsFragment;
             default:
                 return null;
         }

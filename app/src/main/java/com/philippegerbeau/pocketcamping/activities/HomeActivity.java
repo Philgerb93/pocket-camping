@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -28,6 +29,8 @@ public class HomeActivity extends AppCompatActivity {
     ImageButton homeButton;
     ImageButton alertsButton;
     ImageButton profileButton;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,5 +129,27 @@ public class HomeActivity extends AppCompatActivity {
 
     public void toMeals(View view) {
         ((StayFragment) stayFragment).toMeals(view);
+    }
+
+    public void addFriend(View view) {
+        ((ProfileFragment) profileFragment).addFriend(view);
+    }
+
+    public void stopInput() {
+        ((ProfileFragment) profileFragment).stopInput();
+    }
+
+    public void showNav() {
+        LinearLayout nav = findViewById(R.id.navigation);
+        nav.setVisibility(View.VISIBLE);
+    }
+
+    public void hideNav() {
+        LinearLayout nav = findViewById(R.id.navigation);
+        nav.setVisibility(View.GONE);
+    }
+
+    public void submit(View view) {
+        ((ProfileFragment) profileFragment).submit(view);
     }
 }

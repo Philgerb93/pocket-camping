@@ -91,6 +91,6 @@
     <string name="no_email">Email does not exist</string>
     <string name="accept">Accept</string>
     <string name="decline">Decline</string>
-    <string name="new_invite">New friend request from</string>
+    <string name="new_invite">New friend request</string>
 
 </resources>

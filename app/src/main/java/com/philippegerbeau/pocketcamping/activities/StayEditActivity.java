@@ -223,7 +223,7 @@ public class StayEditActivity extends AppCompatActivity {
                 .child("users").child(userID);
 
         if (Handler.user.getStayID() == null) {
-            Handler.user.setstayID(fbUserRef.push().getKey());
+            Handler.user.setStayID(fbUserRef.push().getKey());
             fbUserRef.child("stayID").setValue(Handler.user.getStayID());
             Alert.log(Alert.CREATED, Alert.CAT_STAY, location.getText().toString());
         }

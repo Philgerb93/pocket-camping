@@ -4,6 +4,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Exclude;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
@@ -11,6 +12,7 @@ public class User {
     private String name;
     private String userID;
     private String stayID;
+    private String email;
 
     private DatabaseReference fbUserRef;
     private DatabaseReference fbStayRef;
@@ -53,7 +55,7 @@ public class User {
         return stayID;
     }
 
-    public void setstayID(String stayID) {
+    public void setStayID(String stayID) {
         this.stayID = stayID;
     }
 }

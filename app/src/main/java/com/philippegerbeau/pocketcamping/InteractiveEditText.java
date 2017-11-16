@@ -9,6 +9,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.philippegerbeau.pocketcamping.activities.HomeActivity;
 import com.philippegerbeau.pocketcamping.activities.ItemsActivity;
 
 public class InteractiveEditText extends AppCompatEditText{
@@ -38,7 +39,11 @@ public class InteractiveEditText extends AppCompatEditText{
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    ((ItemsActivity) context).submit(view);
+                    if (context.getClass().equals(ItemsActivity.class)) {
+                        ((ItemsActivity) context).submit(view);
+                    } else {
+                        ((HomeActivity) context).submit(view);
+                    }
                     return true;
                 }
                 return false;
@@ -50,7 +55,12 @@ public class InteractiveEditText extends AppCompatEditText{
         if (keyCode == KeyEvent.KEYCODE_BACK &&
                 event.getAction() == KeyEvent.ACTION_UP) {
 
-            ((ItemsActivity) context).stopInput();
+            if (context.getClass().equals(ItemsActivity.class)) {
+                ((ItemsActivity) context).stopInput();
+            } else {
+                ((HomeActivity) context).stopInput();
+            }
+
             return false;
         }
         return super.dispatchKeyEvent(event);

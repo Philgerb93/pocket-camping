@@ -90,7 +90,7 @@ public class AlertsListViewAdapter extends BaseAdapter {
             action.append(item1Str);
             action.append(alert.getBridge(context));
             action.append(item2Str);
-        } else {
+        } else if (alert.getItem1() != null){
             SpannableStringBuilder item1Str = new SpannableStringBuilder(alert.getItem1().toUpperCase());
             item1Str.setSpan(new ForegroundColorSpan(
                             ContextCompat.getColor(context, R.color.colorPrimaryDark)),
