@@ -181,11 +181,28 @@ public class FriendsFragment extends Fragment {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             if (dataSnapshot.hasChild(input)) {
-                                String friendID = dataSnapshot.child(input).getValue(String.class);
-                                sendInvite(friendID);
+                                final String friendID = dataSnapshot.child(input).getValue(String.class);
 
-                                Toast.makeText(getActivity(), getString(R.string.invitation_sent),
-                                        Toast.LENGTH_SHORT).show();
+                                DatabaseReference fbUserRef = FirebaseDatabase.getInstance()
+                                        .getReference().child("users")
+                                        .child(Handler.user.getUserID());
+                                fbUserRef.child("friends").addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        if (friendID != null && dataSnapshot.hasChild(friendID)) {
+                                            Toast.makeText(getActivity(), getString(R.string.already_friend),
+                                                    Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            sendInvite(friendID);
+
+                                            Toast.makeText(getActivity(), getString(R.string.invitation_sent),
+                                                    Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {}
+                                });
                             } else {
                                 Toast.makeText(getActivity(), getString(R.string.no_email),
                                         Toast.LENGTH_SHORT).show();
@@ -225,7 +242,7 @@ public class FriendsFragment extends Fragment {
             String id = user.getUid();
 
             Friend invite = new Friend(name, email, photoUrl, id);
-            fbFriendRef.child("invites").child(id).setValue(invite);
+            fbFriendRef.child("friends").child(id).setValue(invite);
         }
     }
 

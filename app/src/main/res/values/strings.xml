@@ -88,6 +88,7 @@
     <string name="no_friends">No friends yet</string>
     <string name="invitation_sent">Invitation sent</string>
     <string name="invitation_failed">Invitation failed</string>
+    <string name="already_friend">This user is already your friend</string>
     <string name="no_email">Email does not exist</string>
     <string name="accept">Accept</string>
     <string name="decline">Decline</string>
