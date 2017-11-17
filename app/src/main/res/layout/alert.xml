@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal">
 
     <RelativeLayout
@@ -32,7 +33,8 @@
                 android:padding="16dp"
                 android:scaleType="centerCrop"
                 android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true">
+                android:layout_centerHorizontal="true"
+                tools:ignore="ContentDecription">
             </ImageView>
         </android.support.v7.widget.CardView>
 
@@ -55,7 +57,8 @@
                 android:tint="@color/colorPrimary"
                 android:scaleType="centerCrop"
                 android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true">
+                android:layout_centerHorizontal="true"
+                tools:ignore="ContentDescription">
             </ImageView>
         </android.support.v7.widget.CardView>
 

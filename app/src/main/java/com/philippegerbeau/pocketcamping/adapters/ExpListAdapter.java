@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -85,6 +84,7 @@ public class ExpListAdapter extends BaseExpandableListAdapter {
         return false;
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Override
     public View getGroupView(final int i, boolean b, View view, ViewGroup viewGroup) {
         LayoutInflater inflater = (LayoutInflater) context
@@ -110,6 +110,7 @@ public class ExpListAdapter extends BaseExpandableListAdapter {
         return itemParentView;
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Override
     public View getChildView(int i, int i1, boolean b, View view, ViewGroup viewGroup) {
         LayoutInflater inflater = (LayoutInflater) context

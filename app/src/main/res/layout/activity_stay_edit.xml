@@ -17,7 +17,8 @@
             android:layout_height="160dp"
             android:src="@drawable/home_banner"
             android:foreground="@color/bannerFilter"
-            android:scaleType="centerCrop"/>
+            android:scaleType="centerCrop"
+            tools:ignore="ContentDescription"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -96,7 +97,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:hint="@string/arrival_date"
-                    android:clickable="true"
+                    android:textColor="@color/colorTextPrimary"
                     android:focusable="false"
                     android:onClick="popDate"/>
 
@@ -115,7 +116,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:hint="@string/departure_date"
-                    android:clickable="true"
+                    android:textColor="@color/colorTextPrimary"
                     android:focusable="false"
                     android:onClick="popDate"/>
 
@@ -150,7 +151,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:hint="@string/arrival_time"
-                    android:clickable="true"
+                    android:textColor="@color/colorTextPrimary"
                     android:focusable="false"
                     android:onClick="popTime"/>
 
@@ -168,8 +169,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textColor="@color/colorTextPrimary"
                     android:hint="@string/departure_time"
-                    android:clickable="true"
                     android:focusable="false"
                     android:onClick="popTime"/>
 
@@ -202,7 +203,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textCapWords"
-                    android:hint="@string/spot"
+                    android:hint="@string/spot_input"
                     android:textColor="@color/colorTextPrimary"/>
 
             </android.support.design.widget.TextInputLayout>

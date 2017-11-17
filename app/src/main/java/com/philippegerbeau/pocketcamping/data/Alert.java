@@ -1,7 +1,6 @@
 package com.philippegerbeau.pocketcamping.data;
 
 import android.content.Context;
-import android.support.v4.content.ContextCompat;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Exclude;
@@ -52,10 +51,10 @@ public class Alert {
 
     public static void log(int action, int category, String item1, String item2) {
         DatabaseReference fbStayRef = FirebaseDatabase.getInstance().getReference()
-                .child("stays").child(Handler.user.getStayID());
+                .child("stays").child(Handler.stayID);
 
         Map<String, Object> value = new HashMap<>();
-        value.put("name", Handler.user.getName());
+        value.put("name", Handler.username);
         value.put("action", action);
         if (item1 != null) {
             value.put("item1", item1);
@@ -75,6 +74,7 @@ public class Alert {
         return name;
     }
 
+    @SuppressWarnings("unused")
     public int getAction() {
         return action;
     }
@@ -127,6 +127,7 @@ public class Alert {
         return item2;
     }
 
+    @SuppressWarnings("unused")
     public long getDate() {
         return date;
     }
@@ -139,6 +140,7 @@ public class Alert {
         return sdf.format(calendar.getTime());
     }
 
+    @SuppressWarnings("unused")
     public int getCategory() {
         return category;
     }

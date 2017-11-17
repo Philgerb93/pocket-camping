@@ -28,39 +28,21 @@
             android:gravity="center">
 
             <TextView
+                android:id="@+id/stay_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Mont Orford"
                 android:textSize="@dimen/text_header"/>
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/stay_duration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="20 juillet 2017"
-                    android:textSize="@dimen/text_sub_header"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=" - "
-                    tools:ignore="HardcodedText"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="24 juillet 2017"
-                    android:textSize="@dimen/text_sub_header"/>
-            </LinearLayout>
+                android:textSize="@dimen/text_sub_header"/>
 
             <TextView
+                android:id="@+id/stay_spot"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Emplacement C-137"
                 android:textSize="@dimen/text_app_bar"
                 android:layout_marginTop="16dp"/>
 
@@ -123,6 +105,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:clickable="true"
+            android:focusable="true"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:onClick="toMeals">
 

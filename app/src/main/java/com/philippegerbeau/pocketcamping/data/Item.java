@@ -4,6 +4,7 @@ public class Item implements ListItem {
     private String name;
     private boolean checked;
 
+    @SuppressWarnings("unused")
     public Item() {}
 
     public Item(String name) {

@@ -1,7 +1,6 @@
 package com.philippegerbeau.pocketcamping.fragments;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -9,32 +8,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.philippegerbeau.pocketcamping.Handler;
 import com.philippegerbeau.pocketcamping.InteractiveEditText;
 import com.philippegerbeau.pocketcamping.R;
 import com.philippegerbeau.pocketcamping.activities.HomeActivity;
 import com.philippegerbeau.pocketcamping.adapters.FriendsListViewAdapter;
-import com.philippegerbeau.pocketcamping.data.Container;
 import com.philippegerbeau.pocketcamping.data.Friend;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -58,11 +50,7 @@ public class FriendsFragment extends Fragment {
         final ListView listView = view.findViewById(R.id.list_view);
         final TextView noFriends = view.findViewById(R.id.no_friends);
 
-        final LinearLayout invitePanel = view.findViewById(R.id.invite_panel);
-        final TextView inviteText = view.findViewById(R.id.invite_text);
-
-        FirebaseDatabase.getInstance().getReference().child("users").child(Handler.user.getUserID())
-                .addValueEventListener(new ValueEventListener() {
+        Handler.fbUserRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if (dataSnapshot.hasChild("friends")) {
@@ -72,9 +60,7 @@ public class FriendsFragment extends Fragment {
                             final FriendsListViewAdapter adapter = new FriendsListViewAdapter(getActivity(), friends);
                             listView.setAdapter(adapter);
 
-                            DatabaseReference fbUserRef = FirebaseDatabase.getInstance()
-                                    .getReference().child("users").child(Handler.user.getUserID());
-                            fbUserRef.child("friends")
+                            Handler.fbUserRef.child("friends")
                                     .addChildEventListener(new ChildEventListener() {
                                         @Override
                                         public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -162,6 +148,7 @@ public class FriendsFragment extends Fragment {
         return view;
     }
 
+    @SuppressWarnings("unused")
     public void addFriend(View view) {
         ((HomeActivity) getActivity()).hideNav();
         fab.setVisibility(View.INVISIBLE);
@@ -170,12 +157,12 @@ public class FriendsFragment extends Fragment {
         showKeyboard();
     }
 
+    @SuppressWarnings("unused")
     public void submit(View view) {
         final String input = intEditText.getText().toString().trim()
                 .replace('.', ',');
-        String userEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
-        if (validEmail(input) && !input.equals(userEmail)) {
+        if (validEmail(input) && !input.equals(Handler.email)) {
             FirebaseDatabase.getInstance().getReference().child("emails")
                     .addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
@@ -183,10 +170,7 @@ public class FriendsFragment extends Fragment {
                             if (dataSnapshot.hasChild(input)) {
                                 final String friendID = dataSnapshot.child(input).getValue(String.class);
 
-                                DatabaseReference fbUserRef = FirebaseDatabase.getInstance()
-                                        .getReference().child("users")
-                                        .child(Handler.user.getUserID());
-                                fbUserRef.child("friends").addListenerForSingleValueEvent(new ValueEventListener() {
+                                Handler.fbUserRef.child("friends").addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(DataSnapshot dataSnapshot) {
                                         if (friendID != null && dataSnapshot.hasChild(friendID)) {
@@ -234,16 +218,8 @@ public class FriendsFragment extends Fragment {
         DatabaseReference fbFriendRef = FirebaseDatabase.getInstance().getReference()
                 .child("users").child(friendID);
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            String name = user.getDisplayName();
-            String email = user.getEmail();
-            Uri photoUrl = user.getPhotoUrl();
-            String id = user.getUid();
-
-            Friend invite = new Friend(name, email, photoUrl, id);
-            fbFriendRef.child("friends").child(id).setValue(invite);
-        }
+        Friend invite = new Friend(Handler.username, Handler.email, Handler.photoUrl);
+        fbFriendRef.child("friends").child(Handler.userID).setValue(invite);
     }
 
     public void stopInput() {
@@ -255,11 +231,15 @@ public class FriendsFragment extends Fragment {
 
     private void showKeyboard() {
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.showSoftInput(intEditText, InputMethodManager.SHOW_IMPLICIT);
+        if (imm != null) {
+            imm.showSoftInput(intEditText, InputMethodManager.SHOW_IMPLICIT);
+        }
     }
 
     private void hideKeyboard() {
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(intEditText.getWindowToken(), 0);
+        if (imm != null) {
+            imm.hideSoftInputFromWindow(intEditText.getWindowToken(), 0);
+        }
     }
 }

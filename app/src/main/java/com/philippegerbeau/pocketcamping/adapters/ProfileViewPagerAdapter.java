@@ -6,8 +6,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.philippegerbeau.pocketcamping.R;
-import com.philippegerbeau.pocketcamping.fragments.FriendsFragment;
-import com.philippegerbeau.pocketcamping.fragments.HistoryFragment;
 
 public class ProfileViewPagerAdapter extends FragmentPagerAdapter {
     private Context context;

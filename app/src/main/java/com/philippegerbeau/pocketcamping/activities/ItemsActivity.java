@@ -43,9 +43,7 @@ public class ItemsActivity extends AppCompatActivity {
 
     private ExpListAdapter expListAdapter;
     private ArrayList<Container> containers = new ArrayList<>();
-    private ExpandableListView expListView;
 
-    private DatabaseReference fbStayRef;
     private ListItem selected;
 
 
@@ -62,7 +60,7 @@ public class ItemsActivity extends AppCompatActivity {
         inputLayout = findViewById(R.id.input_layout);
 
         expListAdapter = new ExpListAdapter(this, containers);
-        expListView = findViewById(R.id.exp_list_view);
+        ExpandableListView expListView = findViewById(R.id.exp_list_view);
         expListView.setAdapter(expListAdapter);
 
         expListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -97,10 +95,7 @@ public class ItemsActivity extends AppCompatActivity {
             }
         });
 
-        fbStayRef = FirebaseDatabase.getInstance().getReference()
-                .child("stays").child(Handler.user.getStayID());
-
-        fbStayRef.child("containers").addChildEventListener(new ChildEventListener() {
+        Handler.fbStayRef.child("containers").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Container container = dataSnapshot.getValue(Container.class);
@@ -192,7 +187,7 @@ public class ItemsActivity extends AppCompatActivity {
                         }
 
                         FirebaseDatabase.getInstance().getReference().child("users")
-                                .child(Handler.user.getUserID()).child("itemsPreset")
+                                .child(Handler.userID).child("itemsPreset")
                                 .setValue(value);
                     }
                 }
@@ -212,7 +207,7 @@ public class ItemsActivity extends AppCompatActivity {
 
     private void loadPreset() {
         final DatabaseReference fbUserRef = FirebaseDatabase.getInstance().getReference()
-                .child("users").child(Handler.user.getUserID());
+                .child("users").child(Handler.userID);
 
         fbUserRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -269,7 +264,7 @@ public class ItemsActivity extends AppCompatActivity {
                             value.put(container.getKey(), container);
                         }
 
-                        fbStayRef.child("containers").setValue(value);
+                        Handler.fbStayRef.child("containers").setValue(value);
                         Alert.log(Alert.CHECKED_ALL, Alert.CAT_ITEMS);
                     }
                 }
@@ -303,7 +298,7 @@ public class ItemsActivity extends AppCompatActivity {
                             value.put(container.getKey(), container);
                         }
 
-                        fbStayRef.child("containers").setValue(value);
+                        Handler.fbStayRef.child("containers").setValue(value);
                         Alert.log(Alert.UNCHECKED_ALL, Alert.CAT_ITEMS);
                     }
                 }
@@ -327,7 +322,7 @@ public class ItemsActivity extends AppCompatActivity {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     if (which == DialogInterface.BUTTON_POSITIVE) {
-                        fbStayRef.child("containers").removeValue();
+                        Handler.fbStayRef.child("containers").removeValue();
                         Alert.log(Alert.DELETED_ALL, Alert.CAT_ITEMS);
                     }
                 }
@@ -363,12 +358,12 @@ public class ItemsActivity extends AppCompatActivity {
 
         if (input.length() > 0) {
             if (expListAdapter.getModContainer() == null) {
-                String key = fbStayRef.child("containers").push().getKey();
-                fbStayRef.child("containers").child(key).setValue(new Container(input, key));
+                String key = Handler.fbStayRef.child("containers").push().getKey();
+                Handler.fbStayRef.child("containers").child(key).setValue(new Container(input, key));
                 Alert.log(Alert.ADDED, Alert.CAT_ITEMS, input);
             } else {
                 String containerID = expListAdapter.getModContainer().getKey();
-                fbStayRef.child("containers").child(containerID)
+                Handler.fbStayRef.child("containers").child(containerID)
                         .child("items").push().setValue(new Item(input));
                 Alert.log(Alert.ADDED, Alert.CAT_ITEMS, input,
                         expListAdapter.getModContainer().getName());
@@ -388,11 +383,15 @@ public class ItemsActivity extends AppCompatActivity {
 
     private void showKeyboard() {
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.showSoftInput(intEditText, InputMethodManager.SHOW_IMPLICIT);
+        if (imm != null) {
+            imm.showSoftInput(intEditText, InputMethodManager.SHOW_IMPLICIT);
+        }
     }
 
     private void hideKeyboard() {
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(intEditText.getWindowToken(), 0);
+        if (imm != null) {
+            imm.hideSoftInputFromWindow(intEditText.getWindowToken(), 0);
+        }
     }
 }

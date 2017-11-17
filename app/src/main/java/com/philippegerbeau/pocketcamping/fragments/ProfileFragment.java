@@ -1,6 +1,5 @@
 package com.philippegerbeau.pocketcamping.fragments;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -12,21 +11,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.philippegerbeau.pocketcamping.Handler;
 import com.philippegerbeau.pocketcamping.R;
 import com.philippegerbeau.pocketcamping.adapters.ProfileViewPagerAdapter;
 
 public class ProfileFragment extends Fragment {
-    private FirebaseUser fbUser;
-
     private TextView username;
-    private TextView status;
+    private TextView email;
     private ImageView profilePic;
 
     private Fragment historyFragment;
@@ -42,9 +33,7 @@ public class ProfileFragment extends Fragment {
         friendsFragment = new FriendsFragment();
 
         username = view.findViewById(R.id.username);
-        status = view.findViewById(R.id.status);
-
-        fbUser = FirebaseAuth.getInstance().getCurrentUser();
+        email = view.findViewById(R.id.email);
 
         initViewPager(view);
         setUserInfo();
@@ -64,43 +53,9 @@ public class ProfileFragment extends Fragment {
     }
 
     private void setUserInfo() {
-        if (fbUser != null) {
-            username.setText(fbUser.getDisplayName());
-            //profilePic.setImageURI(fbUser.getPhotoUrl());
-
-            final DatabaseReference fbUserRef = FirebaseDatabase.getInstance().getReference()
-                    .child("users").child(fbUser.getUid());
-            fbUserRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    if (dataSnapshot.hasChild("stayID")) {
-                        setStatus(dataSnapshot);
-                    }
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {}
-            });
-        }
-    }
-
-    private void setStatus(DataSnapshot dataSnapshot) {
-        String stayID = (String) dataSnapshot.child("stayID").getValue();
-
-        if (stayID != null) {
-            DatabaseReference fbStayRef = FirebaseDatabase.getInstance()
-                    .getReference().child("stays").child(stayID);
-
-            fbStayRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    status.setText((String) dataSnapshot.child("location").getValue());
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {}
-            });
-        }
+        username.setText(Handler.username);
+        email.setText(Handler.email);
+        //profilePic.setImageURI(fbUser.getPhotoUrl());
     }
 
     public void addFriend(View view) {

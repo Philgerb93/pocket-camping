@@ -11,14 +11,11 @@ import android.widget.TextView;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.philippegerbeau.pocketcamping.Handler;
 import com.philippegerbeau.pocketcamping.R;
 import com.philippegerbeau.pocketcamping.adapters.AlertsListViewAdapter;
 import com.philippegerbeau.pocketcamping.data.Alert;
-import com.philippegerbeau.pocketcamping.data.Container;
 
 import java.util.ArrayList;
 
@@ -33,8 +30,7 @@ public class AlertsFragment extends Fragment {
         final ListView listView = view.findViewById(R.id.list_view);
         final TextView noAlerts = view.findViewById(R.id.no_alerts);
 
-        FirebaseDatabase.getInstance().getReference().child("users").child(Handler.user.getUserID())
-                .addValueEventListener(new ValueEventListener() {
+        Handler.fbUserRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if (dataSnapshot.child("stayID").exists()) {
@@ -44,9 +40,7 @@ public class AlertsFragment extends Fragment {
                             final AlertsListViewAdapter adapter = new AlertsListViewAdapter(getActivity(), alerts);
                             listView.setAdapter(adapter);
 
-                            DatabaseReference fbStayRef = FirebaseDatabase.getInstance().getReference().child("stays")
-                                    .child(Handler.user.getStayID());
-                            fbStayRef.child("alerts").limitToLast(20)
+                            Handler.fbStayRef.child("alerts").limitToLast(20)
                                     .addChildEventListener(new ChildEventListener() {
                                         @Override
                                         public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -83,9 +77,7 @@ public class AlertsFragment extends Fragment {
                     }
 
                     @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
+                    public void onCancelled(DatabaseError databaseError) {}
                 });
 
         return view;

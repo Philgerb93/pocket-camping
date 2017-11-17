@@ -130,7 +130,8 @@
                 android:scaleType="fitCenter"
                 android:padding="8dp"
                 android:layout_margin="8dp"
-                android:onClick="submit"/>
+                android:onClick="submit"
+                android:contentDescription="@string/submit"/>
 
         </LinearLayout>
 

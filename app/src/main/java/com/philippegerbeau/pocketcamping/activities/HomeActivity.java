@@ -8,13 +8,10 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.philippegerbeau.pocketcamping.Handler;
 import com.philippegerbeau.pocketcamping.R;
 import com.philippegerbeau.pocketcamping.fragments.AlertsFragment;
 import com.philippegerbeau.pocketcamping.fragments.NoStayFragment;
@@ -30,36 +27,25 @@ public class HomeActivity extends AppCompatActivity {
     ImageButton alertsButton;
     ImageButton profileButton;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        setStayListener();
         alertsFragment = new AlertsFragment();
         profileFragment = new ProfileFragment();
 
         homeButton = findViewById(R.id.action_home);
         alertsButton = findViewById(R.id.action_alerts);
         profileButton = findViewById(R.id.action_profile);
-
-        setStayFragment();
     }
 
-    private void setStayFragment() {
-        FirebaseUser fbUser = FirebaseAuth.getInstance().getCurrentUser();
-        String userID = "";
-        if (fbUser != null) {
-            userID = fbUser.getUid();
-        }
-        DatabaseReference fbUserRef = FirebaseDatabase.getInstance().getReference()
-                .child("users").child(userID);
-
-        fbUserRef.addListenerForSingleValueEvent(new ValueEventListener() {
+    private void setStayListener() {
+        Handler.fbUserRef.child("stayID").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.child("stayID").exists()) {
+                if (dataSnapshot.exists()) {
                     stayFragment = new StayFragment();
                 } else {
                     stayFragment = new NoStayFragment();
@@ -89,12 +75,14 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void toHome() {
-        getSupportFragmentManager().beginTransaction().replace(
-                R.id.fragment_container, stayFragment).commit();
+        if (stayFragment != null) {
+            getSupportFragmentManager().beginTransaction().replace(
+                    R.id.fragment_container, stayFragment).commit();
 
-        homeButton.setColorFilter(ContextCompat.getColor(this, R.color.colorPrimary));
-        alertsButton.setColorFilter(ContextCompat.getColor(this, R.color.colorTextPrimary));
-        profileButton.setColorFilter(ContextCompat.getColor(this, R.color.colorTextPrimary));
+            homeButton.setColorFilter(ContextCompat.getColor(this, R.color.colorPrimary));
+            alertsButton.setColorFilter(ContextCompat.getColor(this, R.color.colorTextPrimary));
+            profileButton.setColorFilter(ContextCompat.getColor(this, R.color.colorTextPrimary));
+        }
     }
 
     private void toAlerts() {

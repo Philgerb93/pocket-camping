@@ -11,8 +11,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -64,16 +62,7 @@ public class StayEditActivity extends AppCompatActivity {
     }
 
     private void findExistingData() {
-        FirebaseUser fbUser = FirebaseAuth.getInstance().getCurrentUser();
-        String userID = "";
-        if (fbUser != null) {
-            userID = fbUser.getUid();
-        }
-
-        DatabaseReference fbUserRef = FirebaseDatabase.getInstance().getReference()
-                .child("users").child(userID);
-
-        fbUserRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        Handler.fbUserRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.child("stayID").exists()) {
@@ -87,10 +76,7 @@ public class StayEditActivity extends AppCompatActivity {
     }
 
     private void setExistingData() {
-        DatabaseReference fbStayRef = FirebaseDatabase.getInstance().getReference()
-                .child("stays").child(Handler.user.getStayID());
-
-        fbStayRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        Handler.fbStayRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 location.setText((String) dataSnapshot.child("location").getValue());
@@ -214,22 +200,14 @@ public class StayEditActivity extends AppCompatActivity {
     }
 
     private void submitStay() {
-        FirebaseUser fbUser = FirebaseAuth.getInstance().getCurrentUser();
-        String userID = "";
-        if (fbUser != null) {
-            userID = fbUser.getUid();
-        }
-        DatabaseReference fbUserRef = FirebaseDatabase.getInstance().getReference()
-                .child("users").child(userID);
-
-        if (Handler.user.getStayID() == null) {
-            Handler.user.setStayID(fbUserRef.push().getKey());
-            fbUserRef.child("stayID").setValue(Handler.user.getStayID());
+        if (Handler.stayID == null) {
+            Handler.stayID = Handler.fbUserRef.push().getKey();
+            Handler.fbUserRef.child("stayID").setValue(Handler.stayID);
             Alert.log(Alert.CREATED, Alert.CAT_STAY, location.getText().toString());
         }
 
         DatabaseReference fbStayRef = FirebaseDatabase.getInstance().getReference()
-                .child("stays").child(Handler.user.getStayID());
+                .child("stays").child(Handler.stayID);
         fbStayRef.child("location").setValue(location.getText().toString());
         fbStayRef.child("arrival").setValue(calArrival.getTimeInMillis());
         fbStayRef.child("departure").setValue(calDeparture.getTimeInMillis());

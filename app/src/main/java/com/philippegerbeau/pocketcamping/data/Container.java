@@ -11,6 +11,7 @@ public class Container implements ListItem {
     private Map<String, Item> items = new HashMap<>();
     private String key;
 
+    @SuppressWarnings("unused")
     public Container() {}
 
     public Container(String name, String key) {

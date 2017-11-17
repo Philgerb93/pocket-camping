@@ -11,14 +11,14 @@ public class Friend {
     private boolean accepted;
     private String id;
 
+    @SuppressWarnings("unused")
     public Friend() {}
 
-    public Friend(String name, String email, Uri photoUrl, String id) {
+    public Friend(String name, String email, Uri photoUrl) {
         this.name = name;
         this.email = email;
         this.photoUrl = photoUrl;
         accepted = false;
-        this.id = id;
     }
 
     public String getName() {
