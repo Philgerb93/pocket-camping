@@ -1,13 +1,13 @@
 package com.philippegerbeau.pocketcamping.data;
 
-public class Item implements ListItem {
+public class Ingredient {
     private String name;
     private boolean checked;
 
     @SuppressWarnings("unused")
-    public Item() {}
+    public Ingredient() {}
 
-    public Item(String name) {
+    public Ingredient(String name) {
         this.name = name;
         checked = false;
     }

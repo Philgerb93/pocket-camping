@@ -18,7 +18,7 @@ import com.philippegerbeau.pocketcamping.adapters.ProfileViewPagerAdapter;
 public class ProfileFragment extends Fragment {
     private TextView username;
     private TextView email;
-    private ImageView profilePic;
+    private ImageView profileImg;
 
     private Fragment historyFragment;
     private Fragment friendsFragment;
@@ -34,6 +34,7 @@ public class ProfileFragment extends Fragment {
 
         username = view.findViewById(R.id.username);
         email = view.findViewById(R.id.email);
+        profileImg = view.findViewById(R.id.profile_img);
 
         initViewPager(view);
         setUserInfo();
@@ -55,7 +56,10 @@ public class ProfileFragment extends Fragment {
     private void setUserInfo() {
         username.setText(Handler.username);
         email.setText(Handler.email);
-        //profilePic.setImageURI(fbUser.getPhotoUrl());
+
+        if (Handler.photoUrl != null) {
+            profileImg.setImageURI(Handler.photoUrl);
+        }
     }
 
     public void addFriend(View view) {

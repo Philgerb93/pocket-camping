@@ -39,6 +39,7 @@ public class Alert {
     private int category;
     private String item1;
     private String item2;
+    private String item3;
     private long date;
 
     public static void log(int action, int category) {
@@ -50,6 +51,10 @@ public class Alert {
     }
 
     public static void log(int action, int category, String item1, String item2) {
+        Alert.log(action, category, item1, item2, null);
+    }
+
+    public static void log(int action, int category, String item1, String item2, String item3) {
         DatabaseReference fbStayRef = FirebaseDatabase.getInstance().getReference()
                 .child("stays").child(Handler.stayID);
 
@@ -61,6 +66,9 @@ public class Alert {
         }
         if (item2 != null) {
             value.put("item2", item2);
+        }
+        if (item3 != null) {
+            value.put("item3", item3);
         }
         value.put("category", category);
         value.put("date", ServerValue.TIMESTAMP);
@@ -77,6 +85,28 @@ public class Alert {
     @SuppressWarnings("unused")
     public int getAction() {
         return action;
+    }
+
+    @SuppressWarnings("unused")
+    public int getCategory() {
+        return category;
+    }
+
+    public String getItem1() {
+        return item1;
+    }
+
+    public String getItem2() {
+        return item2;
+    }
+
+    public String getItem3() {
+        return item3;
+    }
+
+    @SuppressWarnings("unused")
+    public long getDate() {
+        return date;
     }
 
     public String getFormattedAction(Context context) {
@@ -104,7 +134,7 @@ public class Alert {
             case UNCHECKED_ALL:
                 return " " + context.getResources().getString(R.string.unchecked_all);
             case DELETED_ALL:
-                return " " + context.getResources().getString(R.string.delete_all);
+                return " " + context.getResources().getString(R.string.deleted_all);
             default:
                 return null;
         }
@@ -112,24 +142,11 @@ public class Alert {
 
     @Exclude
     public String getBridge(Context context) {
-        if (action == ADDED) {
+        if (action == ADDED || action == RENAMED) {
             return " " + context.getResources().getString(R.string.to) + " ";
         } else {
             return " " + context.getResources().getString(R.string.in) + " ";
         }
-    }
-
-    public String getItem1() {
-        return item1;
-    }
-
-    public String getItem2() {
-        return item2;
-    }
-
-    @SuppressWarnings("unused")
-    public long getDate() {
-        return date;
     }
 
     @Exclude
@@ -138,11 +155,6 @@ public class Alert {
         calendar.setTimeInMillis(date);
         SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT, Locale.getDefault());
         return sdf.format(calendar.getTime());
-    }
-
-    @SuppressWarnings("unused")
-    public int getCategory() {
-        return category;
     }
 
     @Exclude

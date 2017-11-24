@@ -77,7 +77,43 @@ public class AlertsListViewAdapter extends BaseAdapter {
         action.append(nameStr);
         action.append(alert.getFormattedAction((context)));
 
-        if (alert.getItem2() != null) {
+        if (alert.getItem3() != null) {
+            SpannableStringBuilder item1Str = new SpannableStringBuilder(alert.getItem1());
+            item1Str.setSpan(new android.text.style.StyleSpan(android.graphics.Typeface.ITALIC),
+                    0, alert.getItem1().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+            SpannableStringBuilder item2Str = new SpannableStringBuilder(alert.getItem2());
+            item2Str.setSpan(new android.text.style.StyleSpan(android.graphics.Typeface.ITALIC),
+                    0, alert.getItem2().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+            SpannableStringBuilder item3Str = new SpannableStringBuilder(alert.getItem3().toUpperCase());
+            item3Str.setSpan(new ForegroundColorSpan(
+                            ContextCompat.getColor(context, R.color.colorPrimaryDark)),
+                    0, alert.getItem3().length(),
+                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+            action.append(item1Str);
+            action.append(alert.getBridge(context));
+            action.append(item2Str);
+            action.append(" " + context.getResources().getString(R.string.in) + " ");
+            action.append(item3Str);
+        } else if (alert.getItem2() != null && alert.getAction() == Alert.RENAMED) {
+            SpannableStringBuilder item1Str = new SpannableStringBuilder(alert.getItem1().toUpperCase());
+            item1Str.setSpan(new ForegroundColorSpan(
+                            ContextCompat.getColor(context, R.color.colorPrimaryDark)),
+                    0, alert.getItem1().length(),
+                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+            SpannableStringBuilder item2Str = new SpannableStringBuilder(alert.getItem2().toUpperCase());
+            item2Str.setSpan(new ForegroundColorSpan(
+                            ContextCompat.getColor(context, R.color.colorPrimaryDark)),
+                    0, alert.getItem2().length(),
+                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+            action.append(item1Str);
+            action.append(alert.getBridge(context));
+            action.append(item2Str);
+        } else if (alert.getItem2() != null) {
             SpannableStringBuilder item1Str = new SpannableStringBuilder(alert.getItem1());
             item1Str.setSpan(new android.text.style.StyleSpan(android.graphics.Typeface.ITALIC),
                     0, alert.getItem1().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);

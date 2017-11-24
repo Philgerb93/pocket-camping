@@ -2,7 +2,9 @@ package com.philippegerbeau.pocketcamping.activities;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.support.v7.widget.Toolbar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
@@ -37,31 +40,73 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ItemsActivity extends AppCompatActivity {
+    private Toolbar toolbar;
     private InteractiveEditText intEditText;
     private FloatingActionButton fab;
     private LinearLayout inputLayout;
+    private LinearLayout selectionLayout;
+    private TextView title;
 
     private ExpListAdapter expListAdapter;
     private ArrayList<Container> containers = new ArrayList<>();
-
-    private ListItem selected;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_items);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+        }
 
         intEditText = findViewById(R.id.int_edit_text);
         fab = findViewById(R.id.fab);
         inputLayout = findViewById(R.id.input_layout);
+        selectionLayout = findViewById(R.id.selection_layout);
+        title = findViewById(R.id.title);
 
         expListAdapter = new ExpListAdapter(this, containers);
         ExpandableListView expListView = findViewById(R.id.exp_list_view);
         expListView.setAdapter(expListAdapter);
+
+        setAdapterListeners(expListView);
+        setFirebaseListeners();
+    }
+
+    private void setAdapterListeners(final ExpandableListView expListView) {
+        expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                Item item = (Item) expListAdapter.getChild(groupPosition, childPosition);
+
+                expListAdapter.setSelected((item == expListAdapter.getSelected()) ? null : item);
+                if (expListAdapter.getSelected() != null) {
+                    Container container = (Container) expListAdapter.getGroup(groupPosition);
+                    expListAdapter.setSelectedGroup(container);
+                }
+
+                setToolbar();
+                expListAdapter.notifyDataSetChanged();
+
+                return true;
+            }
+        });
+
+        expListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+            @Override
+            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+                Container container = (Container) expListAdapter.getGroup(groupPosition);
+
+                expListAdapter.setSelected((container == expListAdapter.getSelected()) ? null : container);
+
+                setToolbar();
+                expListAdapter.notifyDataSetChanged();
+
+                return true;
+            }
+        });
 
         expListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
@@ -71,30 +116,57 @@ public class ItemsActivity extends AppCompatActivity {
                 if (ExpandableListView.getPackedPositionType(id) == ExpandableListView.PACKED_POSITION_TYPE_CHILD) {
                     int childPosition = ExpandableListView.getPackedPositionChild(id);
 
-                    Item item = (Item) expListAdapter.getChild(groupPosition, childPosition);
-                    if (item == selected) {
-                        selected = null;
-                        stopInput();
-                    } else {
-                        selected = item;
-                        startInput(view);
-
-                    }
-                    return true;
-                } else {
                     Container container = (Container) expListAdapter.getGroup(groupPosition);
-                    if (container == selected) {
-                        selected = null;
-                        stopInput();
-                    } else {
-                        selected = container;
-                        startInput(view);
+                    Item item = (Item) expListAdapter.getChild(groupPosition, childPosition);
+                    Boolean checked = !item.isChecked();
+
+                    for(Map.Entry<String, Item> entry : container.getItems().entrySet()) {
+                        String key = entry.getKey();
+                        Item value = entry.getValue();
+
+                        if (value.getName().equals(item.getName())) {
+                            Handler.fbStayRef.child("containers").child(container.getKey())
+                                    .child("items").child(key).child("checked").setValue(checked);
+                            break;
+                        }
                     }
+                    expListAdapter.notifyDataSetChanged();
+
                     return true;
                 }
+
+                return false;
             }
         });
+    }
 
+    private void setToolbar() {
+        if (expListAdapter.getSelected() == null) {
+            selectionLayout.setVisibility(View.GONE);
+            title.setText(getResources().getString(R.string.items));
+            title.setTextColor(Color.WHITE);
+            toolbar.setBackgroundColor(ContextCompat.getColor(
+                    ItemsActivity.this, R.color.colorPrimary));
+            toolbar.getMenu().findItem(R.id.action_save).setVisible(true);
+            toolbar.getMenu().findItem(R.id.action_load).setVisible(true);
+            toolbar.getMenu().findItem(R.id.action_check).setVisible(true);
+            toolbar.getMenu().findItem(R.id.action_uncheck).setVisible(true);
+            toolbar.getMenu().findItem(R.id.action_delete).setVisible(true);
+        } else {
+            selectionLayout.setVisibility(View.VISIBLE);
+            title.setText(expListAdapter.getSelected().getName());
+            title.setTextColor(ContextCompat.getColor(
+                    ItemsActivity.this, R.color.colorTextPrimary));
+            toolbar.setBackgroundColor(Color.WHITE);
+            toolbar.getMenu().findItem(R.id.action_save).setVisible(false);
+            toolbar.getMenu().findItem(R.id.action_load).setVisible(false);
+            toolbar.getMenu().findItem(R.id.action_check).setVisible(false);
+            toolbar.getMenu().findItem(R.id.action_uncheck).setVisible(false);
+            toolbar.getMenu().findItem(R.id.action_delete).setVisible(false);
+        }
+    }
+
+    private void setFirebaseListeners() {
         Handler.fbStayRef.child("containers").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -134,14 +206,10 @@ public class ItemsActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {}
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
+            public void onCancelled(DatabaseError databaseError) {}
         });
     }
 
@@ -344,35 +412,101 @@ public class ItemsActivity extends AppCompatActivity {
         fab.setVisibility(View.INVISIBLE);
         inputLayout.setVisibility(View.VISIBLE);
 
-        if (view.getId() == R.id.fab) {
-            intEditText.setHint(R.string.new_container);
+        if (expListAdapter.getSelected() == null) {
+            if (view.getId() == R.id.fab) {
+                intEditText.setHint(R.string.new_container);
+            } else {
+                intEditText.setHint(R.string.new_item);
+            }
         } else {
-            intEditText.setHint(R.string.new_item);
+            if (expListAdapter.getSelectedGroup() == null) {
+                intEditText.setHint(R.string.edit_item);
+            } else {
+                intEditText.setHint(R.string.edit_container);
+            }
+            intEditText.setText(expListAdapter.getSelected().getName());
+            intEditText.setSelection(intEditText.getText().toString().length());
         }
+
         intEditText.requestFocus();
         showKeyboard();
     }
 
     public void submit(View view) {
-        String input = intEditText.getText().toString();
+        String input = intEditText.getText().toString().trim();
 
         if (input.length() > 0) {
-            if (expListAdapter.getModContainer() == null) {
-                String key = Handler.fbStayRef.child("containers").push().getKey();
-                Handler.fbStayRef.child("containers").child(key).setValue(new Container(input, key));
-                Alert.log(Alert.ADDED, Alert.CAT_ITEMS, input);
+            ListItem selection = expListAdapter.getSelected();
+            if (expListAdapter.getModContainer() == null && selection == null
+                    || selection != null && selection.getClass() == Container.class) {
+                if (containerExists(input)) {
+                    Toast.makeText(this, getString(R.string.already_exists),
+                            Toast.LENGTH_SHORT).show();
+                } else if (selection == null){
+                    String key = Handler.fbStayRef.child("containers").push().getKey();
+                    Handler.fbStayRef.child("containers").child(key).setValue(new Container(input, key));
+                    Alert.log(Alert.ADDED, Alert.CAT_ITEMS, input);
+                } else {
+                    String key = ((Container) selection).getKey();
+                    Alert.log(Alert.RENAMED, Alert.CAT_ITEMS, selection.getName(), input);
+                    Handler.fbStayRef.child("containers").child(key).child("name")
+                            .setValue(input);
+                    title.setText(input);
+                }
             } else {
-                String containerID = expListAdapter.getModContainer().getKey();
-                Handler.fbStayRef.child("containers").child(containerID)
-                        .child("items").push().setValue(new Item(input));
-                Alert.log(Alert.ADDED, Alert.CAT_ITEMS, input,
-                        expListAdapter.getModContainer().getName());
-                expListAdapter.resetModContainer();
+                if (expListAdapter.getModContainer() != null && itemExists(
+                        input, expListAdapter.getModContainer())
+                        || expListAdapter.getSelected() != null && itemExists(
+                                input, expListAdapter.getSelectedGroup())) {
+                    Toast.makeText(this, getString(R.string.already_exists),
+                            Toast.LENGTH_SHORT).show();
+                } else if (expListAdapter.getSelected() == null){
+                    String containerID = expListAdapter.getModContainer().getKey();
+                    Handler.fbStayRef.child("containers").child(containerID)
+                            .child("items").push().setValue(new Item(input));
+                    Alert.log(Alert.ADDED, Alert.CAT_ITEMS, input,
+                            expListAdapter.getModContainer().getName());
+                    expListAdapter.resetModContainer();
+                } else {
+                    Container container = expListAdapter.getSelectedGroup();
+                    Item item = (Item) expListAdapter.getSelected();
+                    for(Map.Entry<String, Item> entry : container.getItems().entrySet()) {
+                        String key = entry.getKey();
+                        Item value = entry.getValue();
+
+                        if (value.getName().equals(item.getName())) {
+                            Handler.fbStayRef.child("containers").child(container.getKey())
+                                    .child("items").child(key).child("name").setValue(input);
+                            Alert.log(Alert.RENAMED, Alert.CAT_ITEMS, item.getName(), input,
+                                    container.getName());
+                            break;
+                        }
+                    }
+                    title.setText(input);
+                }
             }
 
             stopInput();
             hideKeyboard();
         }
+    }
+
+    private boolean containerExists(String input) {
+        for (Container container : containers) {
+            if (container.getName().equals(input)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean itemExists(String input, Container container) {
+        for (Item item : container.getItemsList()) {
+            if (item.getName().equals(input)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void stopInput() {
@@ -393,5 +527,36 @@ public class ItemsActivity extends AppCompatActivity {
         if (imm != null) {
             imm.hideSoftInputFromWindow(intEditText.getWindowToken(), 0);
         }
+    }
+
+    public void editSelection(View view) {
+
+
+        startInput(view);
+    }
+
+    public void deleteSelection(View view) {
+        if (expListAdapter.getSelected().getClass() == Container.class) {
+            Container container = (Container) expListAdapter.getSelected();
+            Handler.fbStayRef.child("containers").child(container.getKey()).removeValue();
+            Alert.log(Alert.DELETED, Alert.CAT_ITEMS, container.getName());
+        } else {
+            Item item = (Item) expListAdapter.getSelected();
+            Container container = expListAdapter.getSelectedGroup();
+
+            for(Map.Entry<String, Item> entry : container.getItems().entrySet()) {
+                String key = entry.getKey();
+                Item value = entry.getValue();
+
+                if (value.getName().equals(item.getName())) {
+                    Handler.fbStayRef.child("containers").child(container.getKey())
+                            .child("items").child(key).removeValue();
+                    break;
+                }
+            }
+            Alert.log(Alert.DELETED, Alert.CAT_ITEMS, item.getName(), container.getName());
+            expListAdapter.setSelectedGroup(null);
+        }
+        expListAdapter.setSelected(null);
     }
 }

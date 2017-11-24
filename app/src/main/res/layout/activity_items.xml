@@ -13,17 +13,54 @@
         android:background="@color/colorPrimary"
         android:elevation="4dp">
 
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/items"
+            android:textColor="@android:color/white"
+            android:layout_gravity="center_vertical"
+            android:textSize="24sp"/>
+
         <LinearLayout
+            android:id="@+id/selection_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:background="@android:color/white"
+            android:gravity="center_vertical"
+            android:visibility="gone">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Items"
-                android:layout_gravity="center_vertical"
-                android:textSize="24sp"/>
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+            </View>
+
+            <ImageButton
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/edit_icon"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:tint="@color/colorTextPrimary"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:scaleType="fitCenter"
+                android:padding="4dp"
+                android:contentDescription="@string/edit"
+                android:onClick="editSelection"/>
+
+            <ImageButton
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/delete_icon"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:tint="@color/colorTextPrimary"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:scaleType="fitCenter"
+                android:padding="4dp"
+                android:contentDescription="@string/delete"
+                android:onClick="deleteSelection"/>
 
         </LinearLayout>
 
@@ -37,7 +74,17 @@
         android:layout_below="@id/toolbar"
         android:groupIndicator="@null">
     </ExpandableListView>
-    
+
+    <TextView
+        android:id="@+id/no_items"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/no_items"
+        android:textColor="@color/colorTextPrimary"
+        android:textSize="26sp"
+        android:layout_centerInParent="true"
+        android:visibility="invisible"/>
+
     <LinearLayout
         android:id="@+id/input_layout"
         android:layout_width="match_parent"
@@ -81,7 +128,8 @@
                 android:scaleType="fitCenter"
                 android:padding="8dp"
                 android:layout_margin="8dp"
-                android:onClick="submit"/>
+                android:onClick="submit"
+                android:contentDescription="@string/submit"/>
 
         </LinearLayout>
 
@@ -97,28 +145,5 @@
         android:layout_alignParentEnd="true"
         android:layout_margin="32dp"
         android:onClick="startInput"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
-
-        <ImageButton
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:src="@drawable/edit_icon"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:tint="@color/colorTextPrimary"
-            android:layout_weight="1"/>
-
-        <ImageButton
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:src="@drawable/delete_icon"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:tint="@color/colorTextPrimary"
-            android:layout_weight="1"/>
-
-    </LinearLayout>
 
 </RelativeLayout>

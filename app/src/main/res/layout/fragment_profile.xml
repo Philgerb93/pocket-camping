@@ -29,7 +29,7 @@
                 android:contentDescription="@string/settings"/>
 
             <android.support.v7.widget.CardView
-                android:id="@+id/profile_img"
+                android:id="@+id/profile_card"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 app:cardElevation="0dp"
@@ -53,6 +53,7 @@
                     android:backgroundTint="@color/colorPrimaryLight">
 
                     <ImageView
+                        android:id="@+id/profile_img"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="fitCenter"
@@ -70,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorTextPrimary"
                 android:textSize="20sp"
-                android:layout_below="@id/profile_img"
+                android:layout_below="@id/profile_card"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="4dp"/>
 

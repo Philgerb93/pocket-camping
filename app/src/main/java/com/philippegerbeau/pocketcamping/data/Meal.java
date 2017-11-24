@@ -6,16 +6,23 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Container implements ListItem {
+public class Meal {
+    public static final int BREAKFAST = 0;
+    public static final int DINNER = 1;
+    public static final int SUPPER = 2;
+    public static final int SNACK = 3;
+
     private String name;
-    private Map<String, Item> items = new HashMap<>();
+    private int category;
+    private Map<String, Ingredient> ingredients = new HashMap<>();
     private String key;
 
     @SuppressWarnings("unused")
-    public Container() {}
+    public Meal() {}
 
-    public Container(String name, String key) {
+    public Meal(String name, int category, String key) {
         this.name = name;
+        this.category = category;
         this.key = key;
     }
 
@@ -24,12 +31,12 @@ public class Container implements ListItem {
     }
 
     @Exclude
-    public ArrayList<Item> getItemsList() {
-        return new ArrayList<>(items.values());
+    public ArrayList<Ingredient> getIngredientsList() {
+        return new ArrayList<>(ingredients.values());
     }
 
-    public Map<String, Item> getItems() {
-        return items;
+    public Map<String, Ingredient> getIngredients() {
+        return ingredients;
     }
 
     @Exclude
@@ -44,8 +51,8 @@ public class Container implements ListItem {
     @Exclude
     public int getCheckedCount() {
         int checked = 0;
-        for (Item item : getItemsList()) {
-            if (item.isChecked()) {
+        for (Ingredient ingredient : getIngredientsList()) {
+            if (ingredient.isChecked()) {
                 checked++;
             }
         }

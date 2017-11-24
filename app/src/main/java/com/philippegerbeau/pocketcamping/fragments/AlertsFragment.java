@@ -47,6 +47,8 @@ public class AlertsFragment extends Fragment {
                                             Alert alert = dataSnapshot.getValue(Alert.class);
 
                                             if (alert != null) {
+
+
                                                 alerts.add(alert);
                                                 adapter.notifyDataSetChanged();
                                             }

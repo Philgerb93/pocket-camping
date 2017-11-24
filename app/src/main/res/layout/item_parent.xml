@@ -33,8 +33,7 @@
         android:src="@drawable/add_icon"
         android:tint="@color/colorPrimaryDark"
         android:background="?attr/selectableItemBackgroundBorderless"
-        android:focusable="true"
-        android:clickable="true"
+        android:focusable="false"
         android:contentDescription="@string/add"/>
 
 

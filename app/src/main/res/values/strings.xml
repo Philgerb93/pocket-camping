@@ -26,6 +26,8 @@
 
     <!-- Stay Activity -->
     <string name="spot">Camp site</string>
+    <string name="manage">Manage participants</string>
+    <string name="meals">Meals</string>
 
     <!-- No Stay Activity -->
     <string name="no_stay">No stay planned</string>
@@ -50,8 +52,14 @@
     <string name="invalid_date">Invalid date</string>
 
     <!-- Items Activity -->
+    <string name="no_items">No items yet</string>
+    <string name="items">Items</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
     <string name="new_container">New container</string>
     <string name="new_item">New item</string>
+    <string name="edit_container">Edit container</string>
+    <string name="edit_item">Edit item</string>
     <string name="save">Save preset</string>
     <string name="load">Load preset</string>
     <string name="check_all">Check all</string>
@@ -70,6 +78,7 @@
     <string name="his_preset">his preset</string>
     <string name="submit">Submit</string>
     <string name="add">Add</string>
+    <string name="already_exists">Already exists</string>
 
     <!-- Alerts Fragment -->
     <string name="no_alerts">No alerts yet</string>

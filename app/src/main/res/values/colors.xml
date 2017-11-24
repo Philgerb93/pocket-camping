@@ -9,7 +9,7 @@
     <color name="colorTextSecondary">#CCC</color>
     <color name="colorDivider">#F0F0F0</color>
 
-    <color name="bannerFilter">#60FFFFFF</color>
+    <color name="bannerFilter">#80FFFFFF</color>
     <color name="transparentStatusBar">#30000000</color>
 
     <color name="alertPulse">#FF5252</color>
